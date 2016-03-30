@@ -1,2 +1,2 @@
-# Find-Me-A-Movie
-Final project for Mobile Apps
+#Final project for Mobile Apps
+ Find-Me-A-Movie
