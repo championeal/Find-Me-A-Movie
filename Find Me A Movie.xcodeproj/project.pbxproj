@@ -15,6 +15,8 @@
 		C7C0E7DF1CAC265A00D1547B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7C0E7DD1CAC265A00D1547B /* LaunchScreen.storyboard */; };
 		C7C0E7EA1CAC265A00D1547B /* Find_Me_A_MovieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C0E7E91CAC265A00D1547B /* Find_Me_A_MovieTests.swift */; };
 		C7C0E7F51CAC265A00D1547B /* Find_Me_A_MovieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C0E7F41CAC265A00D1547B /* Find_Me_A_MovieUITests.swift */; };
+		C7F631311CB59E5C00280768 /* GetStreamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F631301CB59E5C00280768 /* GetStreamsViewController.swift */; };
+		C7F631331CB59EDA00280768 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F631321CB59EDA00280768 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		C7C0E7F01CAC265A00D1547B /* Find Me A MovieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Find Me A MovieUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7C0E7F41CAC265A00D1547B /* Find_Me_A_MovieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Find_Me_A_MovieUITests.swift; sourceTree = "<group>"; };
 		C7C0E7F61CAC265B00D1547B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7F631301CB59E5C00280768 /* GetStreamsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetStreamsViewController.swift; sourceTree = "<group>"; };
+		C7F631321CB59EDA00280768 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,8 +108,10 @@
 				C7C0E7D61CAC265A00D1547B /* SecondViewController.swift */,
 				C7C0E7D81CAC265A00D1547B /* Main.storyboard */,
 				C7C0E7DB1CAC265A00D1547B /* Assets.xcassets */,
+				C7F631301CB59E5C00280768 /* GetStreamsViewController.swift */,
 				C7C0E7DD1CAC265A00D1547B /* LaunchScreen.storyboard */,
 				C7C0E7E01CAC265A00D1547B /* Info.plist */,
+				C7F631321CB59EDA00280768 /* SwiftyJSON.swift */,
 			);
 			path = "Find Me A Movie";
 			sourceTree = "<group>";
@@ -262,6 +268,8 @@
 				C7C0E7D71CAC265A00D1547B /* SecondViewController.swift in Sources */,
 				C7C0E7D31CAC265A00D1547B /* AppDelegate.swift in Sources */,
 				C7C0E7D51CAC265A00D1547B /* FirstViewController.swift in Sources */,
+				C7F631331CB59EDA00280768 /* SwiftyJSON.swift in Sources */,
+				C7F631311CB59E5C00280768 /* GetStreamsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +496,7 @@
 				C7C0E7FB1CAC265B00D1547B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C7C0E7FC1CAC265B00D1547B /* Build configuration list for PBXNativeTarget "Find Me A MovieTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +505,7 @@
 				C7C0E7FE1CAC265B00D1547B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C7C0E7FF1CAC265B00D1547B /* Build configuration list for PBXNativeTarget "Find Me A MovieUITests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +514,7 @@
 				C7C0E8011CAC265B00D1547B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
