@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C75A6D511CB73A9600824BD0 /* movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A6D501CB73A9600824BD0 /* movie.swift */; };
+		C75A6D551CB744FE00824BD0 /* AddFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A6D541CB744FE00824BD0 /* AddFavoritesViewController.swift */; };
 		C7C0E7D31CAC265A00D1547B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C0E7D21CAC265A00D1547B /* AppDelegate.swift */; };
-		C7C0E7D51CAC265A00D1547B /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C0E7D41CAC265A00D1547B /* FirstViewController.swift */; };
-		C7C0E7D71CAC265A00D1547B /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C0E7D61CAC265A00D1547B /* SecondViewController.swift */; };
 		C7C0E7DA1CAC265A00D1547B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7C0E7D81CAC265A00D1547B /* Main.storyboard */; };
 		C7C0E7DC1CAC265A00D1547B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7C0E7DB1CAC265A00D1547B /* Assets.xcassets */; };
 		C7C0E7DF1CAC265A00D1547B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7C0E7DD1CAC265A00D1547B /* LaunchScreen.storyboard */; };
@@ -37,10 +37,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C75A6D501CB73A9600824BD0 /* movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = movie.swift; sourceTree = "<group>"; };
+		C75A6D541CB744FE00824BD0 /* AddFavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFavoritesViewController.swift; sourceTree = "<group>"; };
 		C7C0E7CF1CAC265A00D1547B /* Find Me A Movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Find Me A Movie.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7C0E7D21CAC265A00D1547B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C7C0E7D41CAC265A00D1547B /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		C7C0E7D61CAC265A00D1547B /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		C7C0E7D91CAC265A00D1547B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C7C0E7DB1CAC265A00D1547B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7C0E7DE1CAC265A00D1547B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -80,6 +80,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C75A6D4F1CB73A7600824BD0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C75A6D501CB73A9600824BD0 /* movie.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		C75A6D521CB73B1900824BD0 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				C7F631321CB59EDA00280768 /* SwiftyJSON.swift */,
+				C7C0E7D21CAC265A00D1547B /* AppDelegate.swift */,
+				C7C0E7DB1CAC265A00D1547B /* Assets.xcassets */,
+				C7C0E7DD1CAC265A00D1547B /* LaunchScreen.storyboard */,
+				C7C0E7E01CAC265A00D1547B /* Info.plist */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		C75A6D531CB73B4700824BD0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C75A6D541CB744FE00824BD0 /* AddFavoritesViewController.swift */,
+				C7F631301CB59E5C00280768 /* GetStreamsViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		C7C0E7C61CAC265A00D1547B = {
 			isa = PBXGroup;
 			children = (
@@ -103,15 +132,10 @@
 		C7C0E7D11CAC265A00D1547B /* Find Me A Movie */ = {
 			isa = PBXGroup;
 			children = (
-				C7C0E7D21CAC265A00D1547B /* AppDelegate.swift */,
-				C7C0E7D41CAC265A00D1547B /* FirstViewController.swift */,
-				C7C0E7D61CAC265A00D1547B /* SecondViewController.swift */,
 				C7C0E7D81CAC265A00D1547B /* Main.storyboard */,
-				C7C0E7DB1CAC265A00D1547B /* Assets.xcassets */,
-				C7F631301CB59E5C00280768 /* GetStreamsViewController.swift */,
-				C7C0E7DD1CAC265A00D1547B /* LaunchScreen.storyboard */,
-				C7C0E7E01CAC265A00D1547B /* Info.plist */,
-				C7F631321CB59EDA00280768 /* SwiftyJSON.swift */,
+				C75A6D531CB73B4700824BD0 /* Controllers */,
+				C75A6D4F1CB73A7600824BD0 /* Models */,
+				C75A6D521CB73B1900824BD0 /* Other */,
 			);
 			path = "Find Me A Movie";
 			sourceTree = "<group>";
@@ -265,10 +289,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7C0E7D71CAC265A00D1547B /* SecondViewController.swift in Sources */,
 				C7C0E7D31CAC265A00D1547B /* AppDelegate.swift in Sources */,
-				C7C0E7D51CAC265A00D1547B /* FirstViewController.swift in Sources */,
+				C75A6D551CB744FE00824BD0 /* AddFavoritesViewController.swift in Sources */,
 				C7F631331CB59EDA00280768 /* SwiftyJSON.swift in Sources */,
+				C75A6D511CB73A9600824BD0 /* movie.swift in Sources */,
 				C7F631311CB59E5C00280768 /* GetStreamsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
