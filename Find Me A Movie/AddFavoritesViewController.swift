@@ -11,6 +11,7 @@ import UIKit
 class AddFavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var baseURL = "https://api-public.guidebox.com/v1.43/US/"
     var APIkey = "rK8nuMrG5dZYDqZZFfDb2QO8dk1ATzmB"
+    let gb = GuideboxService(apikey: "rK8nuMrG5dZYDqZZFfDb2QO8dk1ATzmB")
     var movies = [Movie]()  // model for table view
     var resultJSON : String = "" {
         didSet {
@@ -24,7 +25,12 @@ class AddFavoritesViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func search(sender: UIButton) {
         if let searchTerm = searchTextField.text {
-            var searchURL = baseURL+APIkey+"/search/movie/title/\(searchTerm)"
+            gb.search(searchTerm) {
+                (movies) in
+                self.movies = movies
+                self.tableView.reloadData()
+            }
+            /*var searchURL = baseURL+APIkey+"/search/movie/title/\(searchTerm)"
             searchURL = searchURL.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
             let url = NSURL(string: searchURL)
             let request = NSMutableURLRequest(URL: url!)
@@ -44,7 +50,7 @@ class AddFavoritesViewController: UIViewController, UITableViewDelegate, UITable
                     
                 }
             }
-            task.resume()
+            task.resume()*/
         }
     }
     

@@ -22,6 +22,7 @@
 		C7C5D0461CBC3E9800961517 /* libxmlHTMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5D0431CBC3E9800961517 /* libxmlHTMLNode.swift */; };
 		C7C5D0471CBC3E9800961517 /* libxmlParserOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5D0441CBC3E9800961517 /* libxmlParserOption.swift */; };
 		C7C5D04A1CBC3F2700961517 /* Modules in Resources */ = {isa = PBXBuildFile; fileRef = C7C5D0491CBC3F2600961517 /* Modules */; };
+		C7C5D04D1CBC506100961517 /* GuideboxService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5D04C1CBC506100961517 /* GuideboxService.swift */; };
 		C7F631311CB59E5C00280768 /* GetStreamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F631301CB59E5C00280768 /* GetStreamsViewController.swift */; };
 		C7F631331CB59EDA00280768 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F631321CB59EDA00280768 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
@@ -65,6 +66,7 @@
 		C7C5D0431CBC3E9800961517 /* libxmlHTMLNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = libxmlHTMLNode.swift; sourceTree = "<group>"; };
 		C7C5D0441CBC3E9800961517 /* libxmlParserOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = libxmlParserOption.swift; sourceTree = "<group>"; };
 		C7C5D0491CBC3F2600961517 /* Modules */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Modules; sourceTree = "<group>"; };
+		C7C5D04C1CBC506100961517 /* GuideboxService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideboxService.swift; sourceTree = "<group>"; };
 		C7F631301CB59E5C00280768 /* GetStreamsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetStreamsViewController.swift; sourceTree = "<group>"; };
 		C7F631321CB59EDA00280768 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,10 +147,11 @@
 		C7C0E7D11CAC265A00D1547B /* Find Me A Movie */ = {
 			isa = PBXGroup;
 			children = (
-				C7C5D01F1CBC367C00961517 /* Packages */,
 				C7C0E7D81CAC265A00D1547B /* Main.storyboard */,
+				C7C5D04E1CBC507100961517 /* Services */,
 				C75A6D531CB73B4700824BD0 /* Controllers */,
 				C75A6D4F1CB73A7600824BD0 /* Models */,
+				C7C5D01F1CBC367C00961517 /* Packages */,
 				C75A6D521CB73B1900824BD0 /* Other */,
 			);
 			path = "Find Me A Movie";
@@ -209,6 +212,14 @@
 				C7F631301CB59E5C00280768 /* GetStreamsViewController.swift */,
 			);
 			name = Tests;
+			sourceTree = "<group>";
+		};
+		C7C5D04E1CBC507100961517 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C7C5D04C1CBC506100961517 /* GuideboxService.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -343,6 +354,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7C5D04D1CBC506100961517 /* GuideboxService.swift in Sources */,
 				C7C5D0461CBC3E9800961517 /* libxmlHTMLNode.swift in Sources */,
 				C7C5D0281CBC371200961517 /* GetSimilarMoviesViewController.swift in Sources */,
 				C7C5D0451CBC3E9800961517 /* libxmlHTMLDocument.swift in Sources */,
