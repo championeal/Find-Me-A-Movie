@@ -23,6 +23,7 @@
 		C7C5D0471CBC3E9800961517 /* libxmlParserOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5D0441CBC3E9800961517 /* libxmlParserOption.swift */; };
 		C7C5D04A1CBC3F2700961517 /* Modules in Resources */ = {isa = PBXBuildFile; fileRef = C7C5D0491CBC3F2600961517 /* Modules */; };
 		C7C5D04D1CBC506100961517 /* GuideboxService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5D04C1CBC506100961517 /* GuideboxService.swift */; };
+		C7C5D0501CBC551800961517 /* SimilarMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5D04F1CBC551800961517 /* SimilarMovies.swift */; };
 		C7F631311CB59E5C00280768 /* GetStreamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F631301CB59E5C00280768 /* GetStreamsViewController.swift */; };
 		C7F631331CB59EDA00280768 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F631321CB59EDA00280768 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
@@ -67,6 +68,7 @@
 		C7C5D0441CBC3E9800961517 /* libxmlParserOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = libxmlParserOption.swift; sourceTree = "<group>"; };
 		C7C5D0491CBC3F2600961517 /* Modules */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Modules; sourceTree = "<group>"; };
 		C7C5D04C1CBC506100961517 /* GuideboxService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideboxService.swift; sourceTree = "<group>"; };
+		C7C5D04F1CBC551800961517 /* SimilarMovies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimilarMovies.swift; sourceTree = "<group>"; };
 		C7F631301CB59E5C00280768 /* GetStreamsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetStreamsViewController.swift; sourceTree = "<group>"; };
 		C7F631321CB59EDA00280768 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -218,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				C7C5D04C1CBC506100961517 /* GuideboxService.swift */,
+				C7C5D04F1CBC551800961517 /* SimilarMovies.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				C75A6D551CB744FE00824BD0 /* AddFavoritesViewController.swift in Sources */,
 				C7F631331CB59EDA00280768 /* SwiftyJSON.swift in Sources */,
 				C7C5D0391CBC3E5200961517 /* CSS.swift in Sources */,
+				C7C5D0501CBC551800961517 /* SimilarMovies.swift in Sources */,
 				C75A6D511CB73A9600824BD0 /* movie.swift in Sources */,
 				C7F631311CB59E5C00280768 /* GetStreamsViewController.swift in Sources */,
 				C7C5D03A1CBC3E5200961517 /* Kanna.swift in Sources */,

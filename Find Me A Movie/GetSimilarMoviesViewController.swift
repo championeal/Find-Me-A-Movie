@@ -10,36 +10,47 @@ import UIKit
 
 class GetSimilarMoviesViewController: UIViewController {
 
+    let sm = SimilarMoviesService()
+    var bestMovies = [String:Int]()
+    var movies = [String]()
+    let ids = ["tt1045658","tt0420223","tt2395427","tt0478970","tt0169547"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Movie - Silver Linings Playbook
         
         //IMDB
-        let imdbID = "tt1045658"
-        let imdbURL = "http://www.imdb.com/title/"
-        if let url = NSURL(string:imdbURL+imdbID) {
-            if let doc = HTML(url: url, encoding: NSUTF8StringEncoding) {
-                print(doc.title!+"\n")
-                
-                // Search for nodes by XPath
-                for title in doc.xpath("//div[@class='rec-title']/a") {
-                    print(title.text)
+        var count = 1;
+        for id in ids {
+            print("Loading: \(count)")
+            movies = sm.getIMDB(id)
+            for movie in movies {
+                if let _ = bestMovies[movie] {
+                    bestMovies[movie]! += 1
                 }
-                for id in doc.xpath("//div[@class='rec_poster']") {
-                    print(id["data-tconst"])
+                else {
+                    bestMovies[movie] = 1
                 }
             }
+            count++
+        }
+        print(bestMovies)
+        let moviesArray = bestMovies.sort{ $0.1 > $1.1 }
+        
+        for (movie,count) in moviesArray {
+            print(movie,count)
         }
         
         // Rotten Tomatoes
-        let rtID = 771253886;
+        /*let rtID = 771253886;
         let rtURL = "http://www.rottentomatoes.com/m/"
         var fullURL = rtURL+"\(rtID)"
         fullURL = "http://www.rottentomatoes.com/m/silver_linings_playbook/"
         if let url = NSURL(string:fullURL) {
             if let doc = HTML(url: url, encoding: NSUTF8StringEncoding) {
                 print(doc.title)
+                print(doc)
                 
                 // Search for nodes by XPath
                 for title in doc.xpath("//div[@class='recItem']//p") {
@@ -47,7 +58,7 @@ class GetSimilarMoviesViewController: UIViewController {
                 }
             }
             print("this is garbage")
-        }
+        }*/
     }
 
     override func didReceiveMemoryWarning() {
