@@ -8,11 +8,12 @@
 
 import UIKit
 
-class AddFavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AddFavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddFavoritesTableViewCellDelegate {
     var baseURL = "https://api-public.guidebox.com/v1.43/US/"
     var APIkey = "rK8nuMrG5dZYDqZZFfDb2QO8dk1ATzmB"
     let gb = GuideboxService(apikey: "rK8nuMrG5dZYDqZZFfDb2QO8dk1ATzmB")
     var movies = [Movie]()  // model for table view
+    var favorites = [Int]()
     var resultJSON : String = "" {
         didSet {
             print("\(resultJSON)")
@@ -25,32 +26,17 @@ class AddFavoritesViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func search(sender: UIButton) {
         if let searchTerm = searchTextField.text {
+            movies.removeAll()
             gb.search(searchTerm) {
                 (movies) in
                 self.movies = movies
+                for movie in self.movies {
+                    if self.favorites.contains(movie.id){
+                        movie.favorite = true
+                    }
+                }
                 self.tableView.reloadData()
             }
-            /*var searchURL = baseURL+APIkey+"/search/movie/title/\(searchTerm)"
-            searchURL = searchURL.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-            let url = NSURL(string: searchURL)
-            let request = NSMutableURLRequest(URL: url!)
-            
-            let session = NSURLSession.sharedSession()
-            let task = session.dataTaskWithRequest(request){
-                (data, responseText, error) -> Void in
-                if error != nil {
-                    print(error)
-                } else {
-                    let result = String(data: data!, encoding: NSASCIIStringEncoding)!
-                    
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.resultJSON = result
-                        self.parseJSONResponse(data!)
-                    })
-                    
-                }
-            }
-            task.resume()*/
         }
     }
     
@@ -80,21 +66,26 @@ class AddFavoritesViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("AddFavoritesCell", forIndexPath: indexPath) as! AddFavoritesTableViewCell
         
-        cell.textLabel?.text = movies[indexPath.row].title
+        let movie = movies[indexPath.row] as Movie
+        cell.movie = movie
+        cell.delegate = self
         return cell
     }
     
-    func parseJSONResponse( data : NSData ) -> Void {
-        let json = JSON(data: data)
-        movies.removeAll()
-        for (_, movie) in json["results"] {   // using _ in place of key because I don't care about the key (actually the index)
-            movies.append(Movie(id:movie["id"].intValue, title:movie["title"].stringValue))
+    
+    func addFavorite(id: Int){
+        if !favorites.contains(id) {
+            favorites.append(id)
         }
-        tableView.reloadData()
     }
     
+    func removeFavorite(id: Int){
+        if favorites.contains(id) {
+            favorites.removeAtIndex(favorites.indexOf(id)!)
+        }
+    }
     
     /*
     // Override to support conditional editing of the table view.

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C75A6D511CB73A9600824BD0 /* movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A6D501CB73A9600824BD0 /* movie.swift */; };
 		C75A6D551CB744FE00824BD0 /* AddFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A6D541CB744FE00824BD0 /* AddFavoritesViewController.swift */; };
 		C7C0E7D31CAC265A00D1547B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C0E7D21CAC265A00D1547B /* AppDelegate.swift */; };
 		C7C0E7DA1CAC265A00D1547B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7C0E7D81CAC265A00D1547B /* Main.storyboard */; };
@@ -24,6 +23,10 @@
 		C7C5D04A1CBC3F2700961517 /* Modules in Resources */ = {isa = PBXBuildFile; fileRef = C7C5D0491CBC3F2600961517 /* Modules */; };
 		C7C5D04D1CBC506100961517 /* GuideboxService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5D04C1CBC506100961517 /* GuideboxService.swift */; };
 		C7C5D0501CBC551800961517 /* SimilarMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5D04F1CBC551800961517 /* SimilarMovies.swift */; };
+		C7C9DA741CBC6EAD0084172D /* AddFavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9DA731CBC6EAD0084172D /* AddFavoritesTableViewCell.swift */; };
+		C7C9DA761CBC761D0084172D /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9DA751CBC761D0084172D /* FavoritesTableViewController.swift */; };
+		C7C9DA781CBC862A0084172D /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9DA771CBC862A0084172D /* Favorite.swift */; };
+		C7C9DA7A1CBC89690084172D /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9DA791CBC89690084172D /* Movie.swift */; };
 		C7F631311CB59E5C00280768 /* GetStreamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F631301CB59E5C00280768 /* GetStreamsViewController.swift */; };
 		C7F631331CB59EDA00280768 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F631321CB59EDA00280768 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
@@ -46,7 +49,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C75A6D501CB73A9600824BD0 /* movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = movie.swift; sourceTree = "<group>"; };
 		C75A6D541CB744FE00824BD0 /* AddFavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFavoritesViewController.swift; sourceTree = "<group>"; };
 		C7C0E7CF1CAC265A00D1547B /* Find Me A Movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Find Me A Movie.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7C0E7D21CAC265A00D1547B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +71,10 @@
 		C7C5D0491CBC3F2600961517 /* Modules */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Modules; sourceTree = "<group>"; };
 		C7C5D04C1CBC506100961517 /* GuideboxService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideboxService.swift; sourceTree = "<group>"; };
 		C7C5D04F1CBC551800961517 /* SimilarMovies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimilarMovies.swift; sourceTree = "<group>"; };
+		C7C9DA731CBC6EAD0084172D /* AddFavoritesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFavoritesTableViewCell.swift; sourceTree = "<group>"; };
+		C7C9DA751CBC761D0084172D /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
+		C7C9DA771CBC862A0084172D /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
+		C7C9DA791CBC89690084172D /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Movie.swift; path = ../Movie.swift; sourceTree = "<group>"; };
 		C7F631301CB59E5C00280768 /* GetStreamsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetStreamsViewController.swift; sourceTree = "<group>"; };
 		C7F631321CB59EDA00280768 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,7 +107,8 @@
 		C75A6D4F1CB73A7600824BD0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C75A6D501CB73A9600824BD0 /* movie.swift */,
+				C7C9DA791CBC89690084172D /* Movie.swift */,
+				C7C9DA771CBC862A0084172D /* Favorite.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -120,7 +127,9 @@
 		C75A6D531CB73B4700824BD0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C7C9DA751CBC761D0084172D /* FavoritesTableViewController.swift */,
 				C75A6D541CB744FE00824BD0 /* AddFavoritesViewController.swift */,
+				C7C9DA731CBC6EAD0084172D /* AddFavoritesTableViewCell.swift */,
 				C7C5D04B1CBC46C600961517 /* Tests */,
 			);
 			name = Controllers;
@@ -360,14 +369,17 @@
 				C7C5D04D1CBC506100961517 /* GuideboxService.swift in Sources */,
 				C7C5D0461CBC3E9800961517 /* libxmlHTMLNode.swift in Sources */,
 				C7C5D0281CBC371200961517 /* GetSimilarMoviesViewController.swift in Sources */,
+				C7C9DA761CBC761D0084172D /* FavoritesTableViewController.swift in Sources */,
 				C7C5D0451CBC3E9800961517 /* libxmlHTMLDocument.swift in Sources */,
 				C7C5D0471CBC3E9800961517 /* libxmlParserOption.swift in Sources */,
+				C7C9DA7A1CBC89690084172D /* Movie.swift in Sources */,
 				C7C0E7D31CAC265A00D1547B /* AppDelegate.swift in Sources */,
 				C75A6D551CB744FE00824BD0 /* AddFavoritesViewController.swift in Sources */,
 				C7F631331CB59EDA00280768 /* SwiftyJSON.swift in Sources */,
+				C7C9DA781CBC862A0084172D /* Favorite.swift in Sources */,
 				C7C5D0391CBC3E5200961517 /* CSS.swift in Sources */,
 				C7C5D0501CBC551800961517 /* SimilarMovies.swift in Sources */,
-				C75A6D511CB73A9600824BD0 /* movie.swift in Sources */,
+				C7C9DA741CBC6EAD0084172D /* AddFavoritesTableViewCell.swift in Sources */,
 				C7F631311CB59E5C00280768 /* GetStreamsViewController.swift in Sources */,
 				C7C5D03A1CBC3E5200961517 /* Kanna.swift in Sources */,
 			);

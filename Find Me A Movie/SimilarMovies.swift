@@ -16,14 +16,14 @@ class SimilarMoviesService {
         var movies = [String]()
         if let url = NSURL(string:imdbURL+id) {
             if let doc = HTML(url: url, encoding: NSUTF8StringEncoding){
-                print(doc.title!+"\n")
+                //print(doc.title!+"\n")
                 
                 // Search for nodes by XPath
-                for title in doc.xpath("//div[@class='rec-title']/a") {
-                    movies.append(title.text!)
-                }
+                //for title in doc.xpath("//div[@class='rec-title']/a") {
+                //    print(title.text!)
+                //}
                 for id in doc.xpath("//div[@class='rec_poster']") {
-                    print(id["data-tconst"])
+                    movies.append(id["data-tconst"]!)
                 }
             }
         }
