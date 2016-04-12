@@ -12,19 +12,20 @@ class Movie {
     var id: Int
     var title: String
     var favorite = false
-    var imdbID: String?
-    var rtID: String?
-    var themoviedbID: String?
+    var idIMDB: String?
+    var idRottenTomatoes: String?
+    var idTheMovieDB: String?
+    var similarIMDB: [String]?
     
     init(id:Int, title:String){
         self.id = id
         self.title = title
     }
     
-    convenience init(id: Int, title: String, imdbID: String, rtID: String, tmdbID: String){
+    convenience init(id: Int, title: String, idIMDB: String, idRT: String, idTMDB: String){
         self.init(id:id,title:title)
-        self.imdbID = imdbID
-        self.rtID = rtID
-        self.themoviedbID = tmdbID
+        self.idIMDB = idIMDB
+        self.idRottenTomatoes = idRT
+        self.idTheMovieDB = idTMDB
     }
 }

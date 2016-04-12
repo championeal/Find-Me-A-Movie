@@ -12,13 +12,7 @@ class AddFavoritesViewController: UIViewController, UITableViewDelegate, UITable
     var baseURL = "https://api-public.guidebox.com/v1.43/US/"
     let gb = GuideboxService()
     var movies = [Movie]()  // model for table view
-    var favorites = [Int]()
-    var resultJSON : String = "" {
-        didSet {
-            print("\(resultJSON)")
-            //jsonOutputLabel.text = resultJSON
-        }
-    }
+    var favorites = [Movie]() // array for temp persistence
     
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -30,7 +24,8 @@ class AddFavoritesViewController: UIViewController, UITableViewDelegate, UITable
                 (movies) in
                 self.movies = movies
                 for movie in self.movies {
-                    if self.favorites.contains(movie.id){
+                    if let _ = self.favorites.indexOf ({ $0.id == movie.id })
+                    {
                         movie.favorite = true
                     }
                 }
@@ -74,16 +69,12 @@ class AddFavoritesViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     
-    func addFavorite(id: Int){
-        if !favorites.contains(id) {
-            favorites.append(id)
-        }
+    func addFavorite(movie: Movie){
+        favorites.append(movie)
     }
     
-    func removeFavorite(id: Int){
-        if favorites.contains(id) {
-            favorites.removeAtIndex(favorites.indexOf(id)!)
-        }
+    func removeFavorite(movie: Movie){
+        favorites.removeAtIndex(favorites.indexOf({ $0.id == movie.id })!)
     }
     
     /*

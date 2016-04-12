@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -394,11 +395,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Favorites" id="mC1-7j-B9m">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="mRJ-6m-SNt">
-                            <connections>
-                                <segue destination="ZJv-FX-cBw" kind="presentation" id="hTn-fT-U1k"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="mRJ-6m-SNt">
+                                <connections>
+                                    <segue destination="ZJv-FX-cBw" kind="presentation" id="hTn-fT-U1k"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="organize" id="smB-UJ-fLm">
+                                <connections>
+                                    <action selector="organizeFavorites:" destination="jhK-6o-WKB" id="SAo-9q-Nf1"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QDa-wc-Pbt" userLabel="First Responder" sceneMemberID="firstResponder"/>

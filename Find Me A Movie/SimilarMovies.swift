@@ -12,7 +12,7 @@ class SimilarMoviesService {
     let imdbURL = "http://www.imdb.com/title/"
     let rtURL = "http://www.rottentomatoes.com/m/"
     
-    func getIMDB(imdbID:String) -> [String]{
+    func getIMDB(imdbID: String, callback: ([String]) -> Void ){
         var movies = [String]()
         if let url = NSURL(string:imdbURL+imdbID) {
             if let doc = HTML(url: url, encoding: NSUTF8StringEncoding){
@@ -25,8 +25,8 @@ class SimilarMoviesService {
                 for id in doc.xpath("//div[@class='rec_poster']") {
                     movies.append(id["data-tconst"]!)
                 }
+                callback(movies)
             }
         }
-        return movies
     }
 }

@@ -13,6 +13,11 @@ class FavoritesTableViewController: UITableViewController {
     var favorites = [Movie]()
     var favoriteIDs = [Int]()
     let gb = GuideboxService()
+    let sm = SimilarMoviesService()
+    @IBAction func organizeFavorites(sender: UIBarButtonItem) {
+        favorites.sortInPlace({ $0.title < $1.title })
+        tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +50,14 @@ class FavoritesTableViewController: UITableViewController {
 
         let favorite = favorites[indexPath.row] as Movie
         cell.textLabel?.text = "\(favorite.title)"
-
+        if favorite.similarIMDB == nil {
+            if let id = favorite.idIMDB {
+                self.sm.getIMDB(id) {
+                    (similarMovies) in
+                    favorite.similarIMDB = similarMovies
+                }
+            }
+        }
         return cell
     }
     
@@ -93,12 +105,7 @@ class FavoritesTableViewController: UITableViewController {
         if let navVC =
             segue.destinationViewController as? UINavigationController,
             destVC = navVC.topViewController as? AddFavoritesViewController{
-                var sendFavorites = [Int]()
-                for favorite in favorites {
-                    sendFavorites.append(favorite.id)
-                }
-                print(sendFavorites)
-                destVC.favorites = sendFavorites
+                destVC.favorites = favorites
         }
     }
 
@@ -113,14 +120,11 @@ class FavoritesTableViewController: UITableViewController {
             favorites.removeAll()
             tableView.reloadData()
             // add new favorites
-            for favorite in vc.favorites {
-                gb.getMovie(favorite, favorite: true) {
-                    (movie) in
-                    self.favorites.append(movie)
-                    //update the tableView
-                    let indexPath = NSIndexPath(forRow: self.favorites.count-1, inSection: 0)
-                    self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-                }
+            for fav in vc.favorites {
+                self.favorites.append(fav)
+                //update the tableView
+                let indexPath = NSIndexPath(forRow: self.favorites.count-1, inSection: 0)
+                self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             }
         }
     }

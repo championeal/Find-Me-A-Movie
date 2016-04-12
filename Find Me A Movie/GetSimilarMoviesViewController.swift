@@ -21,7 +21,7 @@ class GetSimilarMoviesViewController: UIViewController {
         //Movie - Silver Linings Playbook
         
         //IMDB
-        var count = 1;
+        /*var count = 1;
         for id in ids {
             print("Loading: \(count)")
             movies = sm.getIMDB(id)
@@ -40,7 +40,7 @@ class GetSimilarMoviesViewController: UIViewController {
         
         for (movie,count) in moviesArray {
             print(movie,count)
-        }
+        }*/
         
         // Rotten Tomatoes
         /*let rtID = 771253886;

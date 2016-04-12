@@ -30,11 +30,11 @@ class AddFavoritesTableViewCell: UITableViewCell {
     @IBAction func toggleFavorite(sender: UIButton) {
         if(movie.favorite){
             sender.setTitle("✚ Add Favorite", forState: .Normal)
-            delegate!.removeFavorite(movie.id)
+            delegate!.removeFavorite(movie)
         }
         else{
             sender.setTitle("✓ Added", forState: .Normal)
-            delegate!.addFavorite(movie.id)
+            delegate!.addFavorite(movie)
         }
         movie.favorite = !movie.favorite
     }
@@ -42,6 +42,6 @@ class AddFavoritesTableViewCell: UITableViewCell {
 }
 
 protocol AddFavoritesTableViewCellDelegate: class {
-    func addFavorite(id:Int)
-    func removeFavorite(id:Int)
+    func addFavorite(movie: Movie)
+    func removeFavorite(movie: Movie)
 }

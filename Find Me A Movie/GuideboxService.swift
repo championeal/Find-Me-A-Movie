@@ -31,7 +31,7 @@ class GuideboxService {
                     self.resultJSON = result
                     let json = JSON(data: data!)
                     for (_, movie) in json["results"] {   // using _ in place of key because I don't care about the key (actually the index)
-                        movies.append(Movie(id:movie["id"].intValue, title:movie["title"].stringValue))
+                        movies.append(Movie(id:movie["id"].intValue, title:movie["title"].stringValue, idIMDB: json["imdb"].stringValue, idRT: String(json["rottentomatoes"].intValue), idTMDB: String(json["themoviedb"].intValue)))
                     }
                     callback(movies)
                 })
@@ -59,7 +59,7 @@ class GuideboxService {
                     let json = JSON(data: data!)
                     let movie: Movie?
                     if(favorite){
-                        movie = Movie(id: id, title: json["title"].stringValue, imdbID: json["imdb"].stringValue, rtID: String(json["rottentomatoes"].intValue), tmdbID: String(json["themoviedb"].intValue))
+                        movie = Movie(id: id, title: json["title"].stringValue, idIMDB: json["imdb"].stringValue, idRT: String(json["rottentomatoes"].intValue), idTMDB: String(json["themoviedb"].intValue))
                         callback(movie!)
                     }
                 })
