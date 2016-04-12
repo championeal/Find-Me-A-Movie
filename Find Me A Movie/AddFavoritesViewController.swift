@@ -10,8 +10,7 @@ import UIKit
 
 class AddFavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddFavoritesTableViewCellDelegate {
     var baseURL = "https://api-public.guidebox.com/v1.43/US/"
-    var APIkey = "rK8nuMrG5dZYDqZZFfDb2QO8dk1ATzmB"
-    let gb = GuideboxService(apikey: "rK8nuMrG5dZYDqZZFfDb2QO8dk1ATzmB")
+    let gb = GuideboxService()
     var movies = [Movie]()  // model for table view
     var favorites = [Int]()
     var resultJSON : String = "" {
@@ -27,7 +26,7 @@ class AddFavoritesViewController: UIViewController, UITableViewDelegate, UITable
     @IBAction func search(sender: UIButton) {
         if let searchTerm = searchTextField.text {
             movies.removeAll()
-            gb.search(searchTerm) {
+            gb.searchMovies(searchTerm) {
                 (movies) in
                 self.movies = movies
                 for movie in self.movies {

@@ -10,8 +10,9 @@ import UIKit
 
 class FavoritesTableViewController: UITableViewController {
 
-    var favorites = [Favorite]()
+    var favorites = [Movie]()
     var favoriteIDs = [Int]()
+    let gb = GuideboxService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,24 +32,23 @@ class FavoritesTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return favorites.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("FavoritesCell", forIndexPath: indexPath)
 
-        // Configure the cell...
+        let favorite = favorites[indexPath.row] as Movie
+        cell.textLabel?.text = "\(favorite.title)"
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -109,16 +109,19 @@ class FavoritesTableViewController: UITableViewController {
     
     @IBAction func saveFavorites(segue:UIStoryboardSegue) {
         if let vc = segue.sourceViewController as? AddFavoritesViewController {
-            print(vc.favorites)
-            //add the new player to the players array
+            //reset old array & table view
             favorites.removeAll()
+            tableView.reloadData()
+            // add new favorites
             for favorite in vc.favorites {
-                self.favorites.append(Favorite(id: favorite))
-                //update the tableView
-                //let indexPath = NSIndexPath(forRow: favorites.count-1, inSection: 0)
-                //tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                gb.getMovie(favorite, favorite: true) {
+                    (movie) in
+                    self.favorites.append(movie)
+                    //update the tableView
+                    let indexPath = NSIndexPath(forRow: self.favorites.count-1, inSection: 0)
+                    self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                }
             }
-            self.tableView.reloadData()
         }
     }
 

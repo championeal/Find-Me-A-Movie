@@ -12,9 +12,9 @@ class SimilarMoviesService {
     let imdbURL = "http://www.imdb.com/title/"
     let rtURL = "http://www.rottentomatoes.com/m/"
     
-    func getIMDB(id:String) -> [String]{
+    func getIMDB(imdbID:String) -> [String]{
         var movies = [String]()
-        if let url = NSURL(string:imdbURL+id) {
+        if let url = NSURL(string:imdbURL+imdbID) {
             if let doc = HTML(url: url, encoding: NSUTF8StringEncoding){
                 //print(doc.title!+"\n")
                 

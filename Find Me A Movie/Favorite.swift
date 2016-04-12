@@ -8,14 +8,12 @@
 
 import Foundation
 
-class Favorite: Movie {
+/*class Favorite: Movie {
     var similar: [Int]?
-    let sm = SimilarMoviesService()
+    var imdbID: String
     
-    override init(id: Int){
-        /*dispatch_async(dispatch_get_main_queue(), {
-            similar = sm.getIMDB(id)
-        })*/
-        super.init(id: id)
+    init(id: Int, title: String, imdbID: String, rtID: String, tmdbID: String){
+        self.imdbID = imdbID
+        super.init(id: id, title: title)
     }
-}
+}*/
