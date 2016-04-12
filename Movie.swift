@@ -16,6 +16,7 @@ class Movie {
     var idRottenTomatoes: String?
     var idTheMovieDB: String?
     var similarIMDB: [String]?
+    var similarScore: Int?
     
     init(id:Int, title:String){
         self.id = id

@@ -8,10 +8,9 @@
 
 import UIKit
 
-class FavoritesTableViewController: UITableViewController {
+class FavoritesTableViewController: UITableViewController, MoviesTableViewDelegate {
 
     var favorites = [Movie]()
-    var favoriteIDs = [Int]()
     let gb = GuideboxService()
     let sm = SimilarMoviesService()
     @IBAction func organizeFavorites(sender: UIBarButtonItem) {
@@ -50,18 +49,27 @@ class FavoritesTableViewController: UITableViewController {
 
         let favorite = favorites[indexPath.row] as Movie
         cell.textLabel?.text = "\(favorite.title)"
-        if favorite.similarIMDB == nil {
-            if let id = favorite.idIMDB {
-                self.sm.getIMDB(id) {
-                    (similarMovies) in
-                    favorite.similarIMDB = similarMovies
-                }
-            }
-        }
         return cell
     }
     
-
+    func getRecommendations() -> [String:Int] {
+        var recommendations = [String:Int]()
+            for fav in favorites {
+                if let _ = recommendations[fav.title] {
+                    recommendations[fav.title]! += 1
+                }
+                else {
+                    recommendations[fav.title] = 1
+                }
+            }
+        print(recommendations)
+        let moviesArray = recommendations.sort{ $0.1 > $1.1 }
+        
+        for (movie,count) in moviesArray {
+            print(movie,count)
+        }
+        return recommendations
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -107,6 +115,23 @@ class FavoritesTableViewController: UITableViewController {
             destVC = navVC.topViewController as? AddFavoritesViewController{
                 destVC.favorites = favorites
         }
+        else if let destVC = segue.destinationViewController as? MoviesTableViewController {
+            var recommendations = [String:Int]()
+            for fav in favorites {
+                if let similarMovies = fav.similarIMDB {
+                    for similar in similarMovies {
+                        if let _ = recommendations[similar] {
+                            recommendations[similar]! += 1
+                        }
+                        else {
+                            recommendations[similar] = 1
+                        }
+                    }
+                }
+            }
+            destVC.recommendations = recommendations
+            print(recommendations)
+        }
     }
 
     
@@ -115,16 +140,24 @@ class FavoritesTableViewController: UITableViewController {
     }
     
     @IBAction func saveFavorites(segue:UIStoryboardSegue) {
-        if let vc = segue.sourceViewController as? AddFavoritesViewController {
+        if let sourceVC = segue.sourceViewController as? AddFavoritesViewController {
             //reset old array & table view
             favorites.removeAll()
             tableView.reloadData()
             // add new favorites
-            for fav in vc.favorites {
+            for fav in sourceVC.favorites {
                 self.favorites.append(fav)
                 //update the tableView
                 let indexPath = NSIndexPath(forRow: self.favorites.count-1, inSection: 0)
                 self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                if let id = fav.idIMDB {
+                    
+                    self.sm.getIMDB(id) {
+                        (similarMovies) in
+                        fav.similarIMDB = similarMovies
+                        print(fav.similarIMDB)
+                    }
+                }
             }
         }
     }

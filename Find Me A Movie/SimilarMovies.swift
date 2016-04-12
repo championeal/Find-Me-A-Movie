@@ -13,20 +13,24 @@ class SimilarMoviesService {
     let rtURL = "http://www.rottentomatoes.com/m/"
     
     func getIMDB(imdbID: String, callback: ([String]) -> Void ){
-        var movies = [String]()
-        if let url = NSURL(string:imdbURL+imdbID) {
-            if let doc = HTML(url: url, encoding: NSUTF8StringEncoding){
-                //print(doc.title!+"\n")
-                
-                // Search for nodes by XPath
-                //for title in doc.xpath("//div[@class='rec-title']/a") {
-                //    print(title.text!)
-                //}
-                for id in doc.xpath("//div[@class='rec_poster']") {
-                    movies.append(id["data-tconst"]!)
+        dispatch_async(GlobalUserInitiatedQueue, {
+            var movies = [String]()
+            if let url = NSURL(string:self.imdbURL+imdbID) {
+                if let doc = HTML(url: url, encoding: NSUTF8StringEncoding){
+                    //print(doc.title!+"\n")
+                    
+                    // Search for nodes by XPath
+                    //for title in doc.xpath("//div[@class='rec-title']/a") {
+                    //    print(title.text!)
+                    //}
+                    for id in doc.xpath("//div[@class='rec_poster']") {
+                        movies.append(id["data-tconst"]!)
+                    }
+                    dispatch_async(GlobalMainQueue, {
+                        callback(movies)
+                    })
                 }
-                callback(movies)
             }
-        }
+        })
     }
 }
