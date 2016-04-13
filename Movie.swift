@@ -9,7 +9,7 @@
 import Foundation
 
 class Movie {
-    var id: Int
+    var id: Int?
     var title: String
     var favorite = false
     var idIMDB: String?
@@ -17,6 +17,7 @@ class Movie {
     var idTheMovieDB: String?
     var similarIMDB: [String]?
     var similarScore: Int?
+    var imageURL: String?
     
     init(id:Int, title:String){
         self.id = id
@@ -27,6 +28,12 @@ class Movie {
         self.init(id:id,title:title)
         self.idIMDB = idIMDB
         self.idRottenTomatoes = idRT
+        self.idTheMovieDB = idTMDB
+    }
+    
+    init(title: String, idIMDB: String, idTMDB: String) {
+        self.title = title
+        self.idIMDB = idIMDB
         self.idTheMovieDB = idTMDB
     }
 }

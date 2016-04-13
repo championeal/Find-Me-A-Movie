@@ -22,7 +22,7 @@ class GuideboxService {
             let session = NSURLSession.sharedSession()
             var movies = [Movie]()
             let task = session.dataTaskWithRequest(request){
-                (data, responseText, error) -> Void in
+                (data, response, error) -> Void in
                 if error != nil {
                     print(error)
                 } else {
@@ -48,7 +48,7 @@ class GuideboxService {
         let request = NSMutableURLRequest(URL: url!)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request){
-            (data, responseText, error) -> Void in
+            (data, response, error) -> Void in
             if error != nil {
                 print(error)
             } else {
@@ -69,8 +69,8 @@ class GuideboxService {
         task.resume()
     }
     
-    func getMovieUsingIMDB(idIMDB: String, callback: (Movie) -> Void ) {
-        //dispatch_async(GlobalUserInitiatedQueue, {
+    func searchMoviesUsingIMDB(idIMDB: String, callback: (Movie) -> Void ) {
+        dispatch_async(GlobalUserInitiatedQueue, {
             var searchURL = self.baseURL+self.APIkey+"/search/movie/id/imdb/\(idIMDB)"
             searchURL = searchURL.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
             let delayInSeconds = 1.0
@@ -81,7 +81,7 @@ class GuideboxService {
                 let request = NSMutableURLRequest(URL: url!)
                 let session = NSURLSession.sharedSession()
                 let task = session.dataTaskWithRequest(request){
-                    (data, responseText, error) -> Void in
+                    (data, response, error) -> Void in
                     if error != nil {
                         print(error)
                     } else {
@@ -96,6 +96,6 @@ class GuideboxService {
                 }
             task.resume()
             }
-        //})
+        })
     }
 }

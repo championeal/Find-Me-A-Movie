@@ -11,8 +11,7 @@ import UIKit
 class FavoritesTableViewController: UITableViewController, MoviesTableViewDelegate {
 
     var favorites = [Movie]()
-    let gb = GuideboxService()
-    let sm = SimilarMoviesService()
+    let smService = SimilarMoviesService()
     @IBAction func organizeFavorites(sender: UIBarButtonItem) {
         favorites.sortInPlace({ $0.title < $1.title })
         tableView.reloadData()
@@ -152,7 +151,7 @@ class FavoritesTableViewController: UITableViewController, MoviesTableViewDelega
                 self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
                 if let id = fav.idIMDB {
                     
-                    self.sm.getIMDB(id) {
+                    self.smService.getIMDB(id) {
                         (similarMovies) in
                         fav.similarIMDB = similarMovies
                         print(fav.similarIMDB)

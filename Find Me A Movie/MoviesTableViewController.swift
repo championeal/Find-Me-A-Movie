@@ -13,8 +13,7 @@ class MoviesTableViewController: UITableViewController {
     var recommendations = [String:Int]()
     var recommendedMovies = [Movie]()
     var recs = [String]()
-    let gb = GuideboxService()
-    let sm = SimilarMoviesService()
+    let tmdbService = TheMovieDatabaseService()
     weak var delegate:MoviesTableViewDelegate?
     
     override func viewDidLoad() {
@@ -22,7 +21,7 @@ class MoviesTableViewController: UITableViewController {
         
         for (key,_) in recommendations {
             self.recs.append(key)
-            gb.getMovieUsingIMDB(key) {
+            tmdbService.findMovieUsingIMDB(key) {
                 (movie) in
                 self.recommendedMovies.append(movie)
                 //update the tableView

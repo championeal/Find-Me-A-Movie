@@ -11,6 +11,7 @@
 		C708D1011CBCC402007E1696 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C708D1001CBCC402007E1696 /* MenuTableViewController.swift */; };
 		C708D1031CBCD09C007E1696 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C708D1021CBCD09C007E1696 /* Utils.swift */; };
 		C75A6D551CB744FE00824BD0 /* AddFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A6D541CB744FE00824BD0 /* AddFavoritesViewController.swift */; };
+		C76117FE1CBDDDCC007DF140 /* TheMovieDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76117FD1CBDDDCC007DF140 /* TheMovieDatabaseService.swift */; };
 		C7C0E7D31CAC265A00D1547B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C0E7D21CAC265A00D1547B /* AppDelegate.swift */; };
 		C7C0E7DA1CAC265A00D1547B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7C0E7D81CAC265A00D1547B /* Main.storyboard */; };
 		C7C0E7DC1CAC265A00D1547B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7C0E7DB1CAC265A00D1547B /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		C708D1001CBCC402007E1696 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		C708D1021CBCD09C007E1696 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		C75A6D541CB744FE00824BD0 /* AddFavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFavoritesViewController.swift; sourceTree = "<group>"; };
+		C76117FD1CBDDDCC007DF140 /* TheMovieDatabaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheMovieDatabaseService.swift; sourceTree = "<group>"; };
 		C7C0E7CF1CAC265A00D1547B /* Find Me A Movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Find Me A Movie.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7C0E7D21CAC265A00D1547B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7C0E7D91CAC265A00D1547B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 			children = (
 				C7C5D04C1CBC506100961517 /* GuideboxService.swift */,
 				C7C5D04F1CBC551800961517 /* SimilarMovies.swift */,
+				C76117FD1CBDDDCC007DF140 /* TheMovieDatabaseService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				C7C5D0391CBC3E5200961517 /* CSS.swift in Sources */,
 				C7C5D0501CBC551800961517 /* SimilarMovies.swift in Sources */,
 				C708D1011CBCC402007E1696 /* MenuTableViewController.swift in Sources */,
+				C76117FE1CBDDDCC007DF140 /* TheMovieDatabaseService.swift in Sources */,
 				C7C9DA741CBC6EAD0084172D /* AddFavoritesTableViewCell.swift in Sources */,
 				C7F631311CB59E5C00280768 /* GetStreamsViewController.swift in Sources */,
 				C708D1031CBCD09C007E1696 /* Utils.swift in Sources */,
