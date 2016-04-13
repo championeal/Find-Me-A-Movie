@@ -20,6 +20,10 @@ class FavoritesTableViewController: UITableViewController, MoviesTableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let mov = Movie(id:-1, title:"test")
+        let sim = ["tt0120338", "tt0903624", "tt0145487", "tt1170358", "tt0325980", "tt1298650", "tt1010048", "tt0371746", "tt0454876", "tt2310332", "tt0418279", "tt0480249"]
+        mov.similarIMDB = sim
+        favorites.append(mov)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -114,7 +118,7 @@ class FavoritesTableViewController: UITableViewController, MoviesTableViewDelega
             destVC = navVC.topViewController as? AddFavoritesViewController{
                 destVC.favorites = favorites
         }
-        else if let destVC = segue.destinationViewController as? MoviesTableViewController {
+        else if let destVC = segue.destinationViewController as? MoviesCollectionViewController {
             var recommendations = [String:Int]()
             for fav in favorites {
                 if let similarMovies = fav.similarIMDB {

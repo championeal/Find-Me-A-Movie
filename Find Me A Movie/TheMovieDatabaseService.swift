@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class TheMovieDatabaseService {
     let APIkey = "51dc4d245f1e4da77d735dd774b429c2"
@@ -59,13 +60,27 @@ class TheMovieDatabaseService {
                     self.resultJSON = result
                     let json = JSON(data: data!)
                     let movieResult = json["movie_results"][0]
-                    let movie = Movie(title:movieResult["title"].stringValue, idIMDB: String(idIMDB), idTMDB: String(movieResult["id"].intValue))
+                    let movie = Movie(title: movieResult["title"].stringValue, idIMDB: String(idIMDB), idTMDB: String(movieResult["id"].intValue), imagePosterURL: movieResult["poster_path"].stringValue, imageBackdropURL: movieResult["backdrop_path"].stringValue)
                     dispatch_async(GlobalMainQueue, {
                         callback(movie)
                     })
                 }
             }
             task.resume()
+        })
+    }
+    
+    func getImage(url: String, callback: (UIImage) -> Void ) {
+        dispatch_async(GlobalUserInitiatedQueue, {
+            var image = UIImage()
+            let imageURL = self.imageBaseURL+"w154"+url
+            if let url = NSURL(string: imageURL),
+                data = NSData(contentsOfURL: url) {
+                    image = UIImage(data: data)!
+            }
+            dispatch_async(GlobalMainQueue, {
+                callback(image)
+            })
         })
     }
 }

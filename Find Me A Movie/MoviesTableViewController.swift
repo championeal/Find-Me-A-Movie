@@ -12,7 +12,6 @@ class MoviesTableViewController: UITableViewController {
     
     var recommendations = [String:Int]()
     var recommendedMovies = [Movie]()
-    var recs = [String]()
     let tmdbService = TheMovieDatabaseService()
     weak var delegate:MoviesTableViewDelegate?
     
@@ -20,7 +19,6 @@ class MoviesTableViewController: UITableViewController {
         super.viewDidLoad()
         
         for (key,_) in recommendations {
-            self.recs.append(key)
             tmdbService.findMovieUsingIMDB(key) {
                 (movie) in
                 self.recommendedMovies.append(movie)

@@ -17,7 +17,8 @@ class Movie {
     var idTheMovieDB: String?
     var similarIMDB: [String]?
     var similarScore: Int?
-    var imageURL: String?
+    var posterURL: String?
+    var backdropURL: String?
     
     init(id:Int, title:String){
         self.id = id
@@ -31,9 +32,11 @@ class Movie {
         self.idTheMovieDB = idTMDB
     }
     
-    init(title: String, idIMDB: String, idTMDB: String) {
+    init(title: String, idIMDB: String, idTMDB: String, imagePosterURL: String, imageBackdropURL: String) {
         self.title = title
         self.idIMDB = idIMDB
         self.idTheMovieDB = idTMDB
+        self.posterURL = imagePosterURL
+        self.backdropURL = imageBackdropURL
     }
 }
