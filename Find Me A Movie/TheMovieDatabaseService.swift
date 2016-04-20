@@ -17,6 +17,8 @@ class TheMovieDatabaseService {
     var backdropSizes = [String]()
     var imageSizes = [String]()
     
+    //poster_sizes = ["w92","w154","w185","w342","w500","w780","original"]
+    
     func configuration(){
         dispatch_async(GlobalMainQueue, {
             var fullURL = self.baseURL+"configuration?api_key="+self.APIkey
@@ -73,7 +75,7 @@ class TheMovieDatabaseService {
     func getImage(url: String, callback: (UIImage) -> Void ) {
         dispatch_async(GlobalUserInitiatedQueue, {
             var image = UIImage()
-            let imageURL = self.imageBaseURL+"w154"+url
+            let imageURL = self.imageBaseURL+"w92"+url
             if let url = NSURL(string: imageURL),
                 data = NSData(contentsOfURL: url) {
                     image = UIImage(data: data)!

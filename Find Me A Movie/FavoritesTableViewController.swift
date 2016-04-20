@@ -118,16 +118,17 @@ class FavoritesTableViewController: UITableViewController, MoviesTableViewDelega
             destVC = navVC.topViewController as? AddFavoritesViewController{
                 destVC.favorites = favorites
         }
-        else if let destVC = segue.destinationViewController as? MoviesCollectionViewController {
-            var recommendations = [String:Int]()
+        else if let destVC = segue.destinationViewController as? MoviesTableViewController {
+            var recommendations = [String:Float]()
             for fav in favorites {
                 if let similarMovies = fav.similarIMDB {
                     for similar in similarMovies {
+                        let rating = 1/(Float(similarMovies.indexOf(similar)!)+1)
                         if let _ = recommendations[similar] {
-                            recommendations[similar]! += 1
+                            recommendations[similar]! += rating
                         }
                         else {
-                            recommendations[similar] = 1
+                            recommendations[similar] = rating
                         }
                     }
                 }
@@ -144,23 +145,35 @@ class FavoritesTableViewController: UITableViewController, MoviesTableViewDelega
     
     @IBAction func saveFavorites(segue:UIStoryboardSegue) {
         if let sourceVC = segue.sourceViewController as? AddFavoritesViewController {
-            //reset old array & table view
-            favorites.removeAll()
-            tableView.reloadData()
+            // remove old favorites
+            for fav in favorites {
+                //update the tableView
+                self.tableView.beginUpdates()
+                if sourceVC.favorites.indexOf({ $0.id == fav.id }) < 0 {
+                    let loc = favorites.indexOf({ $0.id == fav.id })!
+                    let indexPath = NSIndexPath(forRow: loc, inSection: 0)
+                    self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                    favorites.removeAtIndex(loc)
+                }
+                self.tableView.endUpdates()
+            }
             // add new favorites
             for fav in sourceVC.favorites {
-                self.favorites.append(fav)
                 //update the tableView
-                let indexPath = NSIndexPath(forRow: self.favorites.count-1, inSection: 0)
-                self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-                if let id = fav.idIMDB {
-                    
-                    self.smService.getIMDB(id) {
-                        (similarMovies) in
-                        fav.similarIMDB = similarMovies
-                        print(fav.similarIMDB)
+                self.tableView.beginUpdates()
+                if favorites.indexOf({ $0.id == fav.id }) < 0 {
+                    self.favorites.append(fav)
+                    let indexPath = NSIndexPath(forRow: self.favorites.count-1, inSection: 0)
+                    self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                    if let id = fav.idIMDB {
+                        self.smService.getIMDB(id) {
+                            (similarMovies) in
+                            fav.similarIMDB = similarMovies
+                            print(fav.similarIMDB)
+                        }
                     }
                 }
+                self.tableView.endUpdates()
             }
         }
     }

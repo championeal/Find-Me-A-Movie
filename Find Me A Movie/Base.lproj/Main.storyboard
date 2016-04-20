@@ -49,7 +49,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MoviesCell" textLabel="31Q-NY-Tgf" style="IBUITableViewCellStyleDefault" id="vSe-kf-ULg">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vSe-kf-ULg" id="i78-K5-C84">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -95,7 +95,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCell" id="aMw-w0-HjS" customClass="MovieCollectionViewCell" customModule="Find_Me_A_Movie" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="154" height="231"/>
+                                <rect key="frame" x="0.0" y="0.0" width="154" height="231"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="154" height="231"/>
@@ -437,7 +437,7 @@
                             </barButtonItem>
                             <barButtonItem systemItem="search" id="I86-tk-LFo">
                                 <connections>
-                                    <segue destination="aKy-ca-vJM" kind="show" id="5mN-73-0Aq"/>
+                                    <segue destination="ZqL-5a-4sU" kind="show" id="ztx-Ej-nKw"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>

@@ -10,16 +10,18 @@ import UIKit
 
 class MoviesTableViewController: UITableViewController {
     
-    var recommendations = [String:Int]()
+    var recommendations = [String:Float]()
     var recommendedMovies = [Movie]()
     let tmdbService = TheMovieDatabaseService()
     weak var delegate:MoviesTableViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        for (key,_) in recommendations {
-            tmdbService.findMovieUsingIMDB(key) {
+        let sortedRecs = recommendations.sort{$0.1 > $1.1}
+        print(sortedRecs)
+        let movies = sortedRecs.map {return $0.0}
+        for mov in movies {
+            tmdbService.findMovieUsingIMDB(mov) {
                 (movie) in
                 self.recommendedMovies.append(movie)
                 //update the tableView
