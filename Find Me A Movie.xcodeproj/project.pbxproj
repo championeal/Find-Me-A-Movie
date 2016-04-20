@@ -10,6 +10,7 @@
 		C708D0FF1CBCBD89007E1696 /* MoviesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C708D0FE1CBCBD89007E1696 /* MoviesTableViewController.swift */; };
 		C708D1011CBCC402007E1696 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C708D1001CBCC402007E1696 /* MenuTableViewController.swift */; };
 		C708D1031CBCD09C007E1696 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C708D1021CBCD09C007E1696 /* Utils.swift */; };
+		C7268CD41CC71D77002ECA66 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7268CD31CC71D77002ECA66 /* MovieDetailViewController.swift */; };
 		C75A6D551CB744FE00824BD0 /* AddFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A6D541CB744FE00824BD0 /* AddFavoritesViewController.swift */; };
 		C76117FE1CBDDDCC007DF140 /* TheMovieDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76117FD1CBDDDCC007DF140 /* TheMovieDatabaseService.swift */; };
 		C76118001CBDF194007DF140 /* MoviesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76117FF1CBDF194007DF140 /* MoviesCollectionViewController.swift */; };
@@ -58,6 +59,7 @@
 		C708D0FE1CBCBD89007E1696 /* MoviesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesTableViewController.swift; sourceTree = "<group>"; };
 		C708D1001CBCC402007E1696 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		C708D1021CBCD09C007E1696 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		C7268CD31CC71D77002ECA66 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		C75A6D541CB744FE00824BD0 /* AddFavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFavoritesViewController.swift; sourceTree = "<group>"; };
 		C76117FD1CBDDDCC007DF140 /* TheMovieDatabaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheMovieDatabaseService.swift; sourceTree = "<group>"; };
 		C76117FF1CBDF194007DF140 /* MoviesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesCollectionViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 		C75A6D531CB73B4700824BD0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C7268CD31CC71D77002ECA66 /* MovieDetailViewController.swift */,
 				C76117FF1CBDF194007DF140 /* MoviesCollectionViewController.swift */,
 				C76118011CBDF20F007DF140 /* MovieCollectionViewCell.swift */,
 				C708D0FE1CBCBD89007E1696 /* MoviesTableViewController.swift */,
@@ -388,6 +391,7 @@
 				C7C5D0461CBC3E9800961517 /* libxmlHTMLNode.swift in Sources */,
 				C7C5D0281CBC371200961517 /* GetSimilarMoviesViewController.swift in Sources */,
 				C7C9DA761CBC761D0084172D /* FavoritesTableViewController.swift in Sources */,
+				C7268CD41CC71D77002ECA66 /* MovieDetailViewController.swift in Sources */,
 				C7C5D0451CBC3E9800961517 /* libxmlHTMLDocument.swift in Sources */,
 				C7C5D0471CBC3E9800961517 /* libxmlParserOption.swift in Sources */,
 				C708D0FF1CBCBD89007E1696 /* MoviesTableViewController.swift in Sources */,

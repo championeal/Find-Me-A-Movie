@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
@@ -65,7 +66,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="Jkg-qt-dKX" kind="show" id="Cl6-G1-xz5"/>
+                                    <segue destination="Jkg-qt-dKX" kind="show" id="I4B-WO-w0z"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -132,7 +133,7 @@
         <!--Movie Detail-->
         <scene sceneID="Bhp-vU-HOD">
             <objects>
-                <viewController title="Movie Detail" id="Jkg-qt-dKX" sceneMemberID="viewController">
+                <viewController title="Movie Detail" id="Jkg-qt-dKX" customClass="MovieDetailViewController" customModule="Find_Me_A_Movie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Iss-2e-W7V"/>
                         <viewControllerLayoutGuide type="bottom" id="3l0-mG-w5C"/>
@@ -141,52 +142,59 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V6v-TH-PCb">
-                                <rect key="frame" x="20" y="72" width="280" height="140"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V6v-TH-PCb">
+                                <rect key="frame" x="0.0" y="64" width="600" height="338"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="V6v-TH-PCb" secondAttribute="height" multiplier="300:169" id="xOe-03-Y0c"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Movie Name (Year)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MY8-Io-Lqy">
-                                <rect key="frame" x="20" y="220" width="168" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Name (Year)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MY8-Io-Lqy">
+                                <rect key="frame" x="20" y="370" width="560" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="IMDb Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCl-Qf-2VE">
-                                <rect key="frame" x="20" y="254" width="101" height="21"/>
+                                <rect key="frame" x="0.0" y="0.0" width="84" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rotten Tomatoes Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hEu-mc-naX">
-                                <rect key="frame" x="129" y="254" width="185" height="21"/>
+                                <rect key="frame" x="0.0" y="0.0" width="165" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Where can I watch this movie?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bj9-di-gUO">
-                                <rect key="frame" x="20" y="293" width="236" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Movie Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9N-tz-IL8">
-                                <rect key="frame" x="20" y="365" width="150" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="(Streaming services and links)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8H-kw-DwQ">
-                                <rect key="frame" x="38" y="315" width="200" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9N-tz-IL8">
+                                <rect key="frame" x="20" y="410" width="560" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="V6v-TH-PCb" secondAttribute="trailing" constant="-20" id="45E-3g-aFo"/>
+                            <constraint firstItem="V6v-TH-PCb" firstAttribute="top" secondItem="Iss-2e-W7V" secondAttribute="bottom" id="SgI-46-uIP"/>
+                            <constraint firstItem="p9N-tz-IL8" firstAttribute="top" secondItem="V6v-TH-PCb" secondAttribute="bottom" constant="8" id="T9g-BK-LnD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MY8-Io-Lqy" secondAttribute="trailing" id="grF-d2-MR3"/>
+                            <constraint firstItem="V6v-TH-PCb" firstAttribute="leading" secondItem="9GN-Zs-ATU" secondAttribute="leadingMargin" constant="-20" id="iRt-3D-fuq"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="p9N-tz-IL8" secondAttribute="leading" id="ioY-xL-WeL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="p9N-tz-IL8" secondAttribute="trailing" id="pCx-M7-evQ"/>
+                            <constraint firstItem="MY8-Io-Lqy" firstAttribute="bottom" secondItem="V6v-TH-PCb" secondAttribute="bottom" constant="-8" id="phD-lx-nBt"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="MY8-Io-Lqy" secondAttribute="leading" id="yLm-EI-Vdd"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="backdropImageView" destination="V6v-TH-PCb" id="pHG-AF-WkC"/>
+                        <outlet property="movieDescriptionLabel" destination="p9N-tz-IL8" id="2gv-2S-M4h"/>
+                        <outlet property="movieNameLabel" destination="MY8-Io-Lqy" id="SBG-5u-6f8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E5L-rd-8hF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4678" y="765"/>
+            <point key="canvasLocation" x="4675" y="765"/>
         </scene>
         <!--Menu-->
         <scene sceneID="Nyz-vk-5Xp">
@@ -581,6 +589,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Sld-ca-6T6"/>
+        <segue reference="I4B-WO-w0z"/>
     </inferredMetricsTieBreakers>
 </document>

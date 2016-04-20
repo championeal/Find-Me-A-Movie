@@ -46,6 +46,32 @@ class TheMovieDatabaseService {
         })
     }
     
+    /*func getMovie(id: String, callback: (Movie) -> Void ) {
+        dispatch_async(GlobalUserInitiatedQueue, {
+            var searchURL = self.baseURL+"movie/"+id+"?external_source=imdb_id&api_key="+self.APIkey
+            searchURL = searchURL.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+            let url = NSURL(string: searchURL)
+            let request = NSMutableURLRequest(URL: url!)
+            let session = NSURLSession.sharedSession()
+            let task = session.dataTaskWithRequest(request){
+                (data, response, error) -> Void in
+                if error != nil {
+                    print(error)
+                } else {
+                    let result = String(data: data!, encoding: NSASCIIStringEncoding)!
+                    self.resultJSON = result
+                    let json = JSON(data: data!)
+                    let movieResult = json["movie_results"][0]
+                    let movie = Movie()
+                    dispatch_async(GlobalMainQueue, {
+                        callback(movie)
+                    })
+                }
+            }
+            task.resume()
+        })
+    }*/
+    
     func findMovieUsingIMDB(idIMDB: String, callback: (Movie) -> Void ) {
         dispatch_async(GlobalUserInitiatedQueue, {
             var searchURL = self.baseURL+"find/"+idIMDB+"?external_source=imdb_id&api_key="+self.APIkey
@@ -62,7 +88,7 @@ class TheMovieDatabaseService {
                     self.resultJSON = result
                     let json = JSON(data: data!)
                     let movieResult = json["movie_results"][0]
-                    let movie = Movie(title: movieResult["title"].stringValue, idIMDB: String(idIMDB), idTMDB: String(movieResult["id"].intValue), imagePosterURL: movieResult["poster_path"].stringValue, imageBackdropURL: movieResult["backdrop_path"].stringValue)
+                    let movie = Movie(title: movieResult["title"].stringValue, overview: movieResult["overview"].stringValue ,idIMDB: String(idIMDB), idTMDB: String(movieResult["id"].intValue), imagePosterURL: movieResult["poster_path"].stringValue, imageBackdropURL: movieResult["backdrop_path"].stringValue)
                     dispatch_async(GlobalMainQueue, {
                         callback(movie)
                     })
@@ -82,6 +108,20 @@ class TheMovieDatabaseService {
             }
             dispatch_async(GlobalMainQueue, {
                 callback(image)
+            })
+        })
+    }
+    
+    func getBackdrop(url: String, callback: (UIImage) -> Void ) {
+        dispatch_async(GlobalUserInitiatedQueue, {
+            var backdrop = UIImage()
+            let backdropURL = self.imageBaseURL+"w300"+url
+            if let url = NSURL(string: backdropURL),
+                data = NSData(contentsOfURL: url) {
+                    backdrop = UIImage(data: data)!
+            }
+            dispatch_async(GlobalMainQueue, {
+                callback(backdrop)
             })
         })
     }

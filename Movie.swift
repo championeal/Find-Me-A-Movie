@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import UIKit
 
 class Movie {
     var id: Int?
     var title: String
+    var description: String?
     var favorite = false
     var idIMDB: String?
     var idRottenTomatoes: String?
@@ -18,7 +20,9 @@ class Movie {
     var similarIMDB: [String]?
     var similarScore: Int?
     var posterURL: String?
+    var poster: UIImage?
     var backdropURL: String?
+    var backdrop: UIImage?
     
     init(id:Int, title:String){
         self.id = id
@@ -32,8 +36,9 @@ class Movie {
         self.idTheMovieDB = idTMDB
     }
     
-    init(title: String, idIMDB: String, idTMDB: String, imagePosterURL: String, imageBackdropURL: String) {
+    init(title: String, overview: String, idIMDB: String, idTMDB: String, imagePosterURL: String, imageBackdropURL: String) {
         self.title = title
+        self.description = overview
         self.idIMDB = idIMDB
         self.idTheMovieDB = idTMDB
         self.posterURL = imagePosterURL

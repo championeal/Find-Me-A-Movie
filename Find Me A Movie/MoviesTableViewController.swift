@@ -25,8 +25,10 @@ class MoviesTableViewController: UITableViewController {
                 (movie) in
                 self.recommendedMovies.append(movie)
                 //update the tableView
+                self.tableView.beginUpdates()
                 let indexPath = NSIndexPath(forRow: self.recommendedMovies.count-1, inSection: 0)
                 self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                self.tableView.endUpdates()
             }
         }
         // Uncomment the following line to preserve selection between presentations
@@ -60,7 +62,15 @@ class MoviesTableViewController: UITableViewController {
         return cell
     }
     
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destVC =
+            segue.destinationViewController as? MovieDetailViewController,
+            cell = sender as? UITableViewCell,
+            indexPath = self.tableView.indexPathForCell(cell),
+            movie = recommendedMovies[indexPath.row] as Movie?{
+                destVC.movie = movie
+        }
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
