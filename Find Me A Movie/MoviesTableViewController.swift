@@ -19,16 +19,24 @@ class MoviesTableViewController: UITableViewController {
         super.viewDidLoad()
         let sortedRecs = recommendations.sort{$0.1 > $1.1}
         print(sortedRecs)
-        let movies = sortedRecs.map {return $0.0}
-        for mov in movies {
-            tmdbService.findMovieUsingIMDB(mov) {
+        //let sortedTitles = sortedRecs.map {return $0.0}
+        var i = 0
+        for rec in sortedRecs {
+            let title = rec.0
+            let rating = rec.1
+            tmdbService.findMovieUsingIMDB(title) {
                 (movie) in
                 self.recommendedMovies.append(movie)
+                movie.similarRating = rating
                 //update the tableView
                 self.tableView.beginUpdates()
                 let indexPath = NSIndexPath(forRow: self.recommendedMovies.count-1, inSection: 0)
                 self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
                 self.tableView.endUpdates()
+            }
+            i++
+            if(i >= 10) {
+                break
             }
         }
         // Uncomment the following line to preserve selection between presentations
