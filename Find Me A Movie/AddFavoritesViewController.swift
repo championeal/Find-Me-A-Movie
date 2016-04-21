@@ -24,7 +24,7 @@ class AddFavoritesViewController: UIViewController, UITableViewDelegate, UITable
                 (movies) in
                 self.movies = movies
                 for movie in self.movies {
-                    if let _ = self.favorites.indexOf ({ $0.id == movie.id })
+                    if let _ = self.favorites.indexOf ({ $0.idGuidebox == movie.idGuidebox })
                     {
                         movie.favorite = true
                     }
@@ -74,7 +74,7 @@ class AddFavoritesViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func removeFavorite(movie: Movie){
-        favorites.removeAtIndex(favorites.indexOf({ $0.id == movie.id })!)
+        favorites.removeAtIndex(favorites.indexOf({ $0.idGuidebox == movie.idGuidebox })!)
     }
     
     /*
