@@ -25,6 +25,10 @@ class Movie {
     var backdropURL: String?
     var backdropImage: UIImage?
     
+    init(){
+        self.title = ""
+    }
+    
     init(id:Int, title:String){
         self.idGuidebox = "\(id)"
         self.title = title
