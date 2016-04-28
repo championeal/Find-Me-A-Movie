@@ -23,7 +23,7 @@ class RecommendationsTableViewController: UITableViewController {
         recommendedMovies = [Movie]()
         tableView.reloadData()
         for fav in ratings {
-            if let similarMovies = fav.similarIMDB {
+            if let similarMovies = fav.similarTheMovieDB {
                 for similar in similarMovies {
                     let rating = 1/(Float(similarMovies.indexOf(similar)!)+1)
                     if let _ = recommendations[similar] {
@@ -40,17 +40,19 @@ class RecommendationsTableViewController: UITableViewController {
         //let sortedTitles = sortedRecs.map {return $0.0}
         var i = 0
         for rec in sortedRecs {
-            let title = rec.0
+            let id = rec.0
             let rating = rec.1
-            tmdbService.findMovieUsingIMDB(title) {
+            tmdbService.getMovie(id) {
                 (movie) in
-                self.recommendedMovies.append(movie)
-                movie.similarRating = rating
-                //update the tableView
-                self.tableView.beginUpdates()
-                let indexPath = NSIndexPath(forRow: self.recommendedMovies.count-1, inSection: 0)
-                self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-                self.tableView.endUpdates()
+                if ratings.indexOf({ $0.idTheMovieDB == movie.idTheMovieDB }) < 0 {
+                    self.recommendedMovies.append(movie)
+                    movie.similarRating = rating
+                    //update the tableView
+                    self.tableView.beginUpdates()
+                    let indexPath = NSIndexPath(forRow: self.recommendedMovies.count-1, inSection: 0)
+                    self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                    self.tableView.endUpdates()
+                }
             }
             i++
             if(i >= 10) {

@@ -11,6 +11,7 @@ import UIKit
 class GetSimilarMoviesViewController: UIViewController {
 
     let sm = SimilarMoviesService()
+    let tmdbService = TheMovieDatabaseService()
     var bestMovies = [String:Int]()
     var movies = [String]()
     let ids = ["tt1045658","tt0420223","tt2395427","tt0478970","tt0169547"]
@@ -20,7 +21,7 @@ class GetSimilarMoviesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //var movies = [String]()
+        var movies = [String]()
         if let url = NSURL(string:tmdbURL+tmdbID+"/recommended") {
             if let doc = HTML(url: url, encoding: NSUTF8StringEncoding){
                 //print(doc.title!+"\n")
@@ -31,6 +32,7 @@ class GetSimilarMoviesViewController: UIViewController {
                     let index = text.startIndex.advancedBy(7)
                     let id = text.substringFromIndex(index)
                     print(id)
+                    movies.append(id)
                 }
                 //for title in doc.xpath("//div[@class='rec-title']/a") {
                 //    print(title.text!)
@@ -42,6 +44,10 @@ class GetSimilarMoviesViewController: UIViewController {
                     callback(movies)
                 })*/
             }
+        }
+        tmdbService.getMovie(movies[0]){
+            (movie) in
+            print(movie.title)
         }
         
         //Movie - Silver Linings Playbook

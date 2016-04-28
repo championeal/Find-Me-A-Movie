@@ -105,14 +105,22 @@ class MovieDetailViewController: UIViewController {
         self.backdropImageView.layer.insertSublayer(gradient, atIndex: 0)
     }
 
-    /*
-    // MARK: - Navigation
-
+    override func didMoveToParentViewController(parent: UIViewController?) {
+        print("hello")
+        if movie.favorite {
+            smService.getTheMovieDB(movie.idTheMovieDB!){
+                (similarMovies) in
+                self.movie.similarTheMovieDB = similarMovies
+                print(self.movie.similarTheMovieDB)
+            }
+        }
+    }
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
     }
-    */
 
 }

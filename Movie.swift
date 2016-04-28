@@ -19,6 +19,7 @@ class Movie {
     var idRottenTomatoes: String?
     var idTheMovieDB: String?
     var similarIMDB: [String]?
+    var similarTheMovieDB: [String]?
     var similarRating: Float?
     var posterURL: String?
     var posterImage: UIImage?

@@ -907,11 +907,11 @@
             </objects>
             <point key="canvasLocation" x="5444" y="-1702"/>
         </scene>
-        <!--Recommendations-->
+        <!--Recommended-->
         <scene sceneID="QWF-6V-rLY">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2oS-Qs-u5q" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Recommendations" image="recommendations" id="FQh-Yu-MwD"/>
+                    <tabBarItem key="tabBarItem" title="Recommended" image="recommendations" id="FQh-Yu-MwD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k3r-UB-73t">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
