@@ -20,7 +20,7 @@ class FavoritesTableViewController: UITableViewController, MoviesTableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let mov = Movie(id:-1, title:"test")
+        /*let mov = Movie(id:-1, title:"test")
         let sim = ["tt0120338", "tt0903624", "tt0145487", "tt1170358", "tt0325980", "tt1298650", "tt1010048", "tt0371746", "tt0454876", "tt2310332", "tt0418279", "tt0480249"]
         mov.similarIMDB = sim
         favorites.append(mov)
@@ -28,7 +28,7 @@ class FavoritesTableViewController: UITableViewController, MoviesTableViewDelega
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()*/
     }
 
     override func didReceiveMemoryWarning() {

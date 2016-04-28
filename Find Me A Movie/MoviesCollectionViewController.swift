@@ -17,7 +17,7 @@ class MoviesCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for (key,_) in recommendations {
+        /*for (key,_) in recommendations {
             tmdbService.findMovieUsingIMDB(key) {
                 (movie) in
                 self.recommendedMovies.append(movie)
@@ -25,7 +25,7 @@ class MoviesCollectionViewController: UICollectionViewController {
                 let indexPath = NSIndexPath(forRow: self.recommendedMovies.count-1, inSection: 0)
                 self.collectionView!.insertItemsAtIndexPaths([indexPath])
             }
-        }
+        }*/
         //if let patternImage = UIImage(named: "Pattern") {
         //    view.backgroundColor = UIColor(patternImage: patternImage)
         //}

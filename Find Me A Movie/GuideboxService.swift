@@ -13,7 +13,7 @@ class GuideboxService {
     let APIkey = "rK8nuMrG5dZYDqZZFfDb2QO8dk1ATzmB"
     var resultJSON: String?
     
-    func searchMovies(search: String, callback: ([Movie]) -> Void ) {
+    /*func searchMovies(search: String, callback: ([Movie]) -> Void ) {
         dispatch_async(GlobalUserInitiatedQueue, {
             var searchURL = self.baseURL+self.APIkey+"/search/movie/title/\(search)"
             searchURL = searchURL.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
@@ -97,5 +97,5 @@ class GuideboxService {
             task.resume()
             }
         })
-    }
+    }*/
 }

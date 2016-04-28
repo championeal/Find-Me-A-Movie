@@ -18,7 +18,7 @@ class AddFavoritesViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func search(sender: UIButton) {
-        if let searchTerm = searchTextField.text {
+        /*if let searchTerm = searchTextField.text {
             movies.removeAll()
             gbService.searchMovies(searchTerm) {
                 (movies) in
@@ -31,7 +31,7 @@ class AddFavoritesViewController: UIViewController, UITableViewDelegate, UITable
                 }
                 self.tableView.reloadData()
             }
-        }
+        }*/
     }
     
     override func viewDidLoad() {
