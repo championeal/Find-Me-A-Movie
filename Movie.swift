@@ -10,22 +10,28 @@ import Foundation
 import UIKit
 
 class Movie {
-    var id: Int?
     var title: String
+    var releaseDate: String?
     var description: String?
     var favorite = false
+    var idGuidebox: String?
     var idIMDB: String?
     var idRottenTomatoes: String?
     var idTheMovieDB: String?
     var similarIMDB: [String]?
+    var similarTheMovieDB: [String]?
     var similarRating: Float?
     var posterURL: String?
-    var poster: UIImage?
+    var posterImage: UIImage?
     var backdropURL: String?
-    var backdrop: UIImage?
+    var backdropImage: UIImage?
+    
+    init(){
+        self.title = ""
+    }
     
     init(id:Int, title:String){
-        self.id = id
+        self.idGuidebox = "\(id)"
         self.title = title
     }
     
@@ -43,5 +49,23 @@ class Movie {
         self.idTheMovieDB = idTMDB
         self.posterURL = imagePosterURL
         self.backdropURL = imageBackdropURL
+    }
+    init(title: String, release_date: String, overview: String, idTMDB: String, poster_path: String, backdrop_path: String) {
+        self.title = title
+        self.releaseDate = release_date
+        self.description = overview
+        self.idTheMovieDB = idTMDB
+        if(poster_path == "") {
+            self.posterURL = nil
+        }
+        else {
+            self.posterURL = poster_path
+        }
+        if(backdrop_path == "") {
+            self.backdropURL = nil
+        }
+        else {
+            self.backdropURL = backdrop_path
+        }
     }
 }

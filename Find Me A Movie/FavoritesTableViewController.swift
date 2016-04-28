@@ -149,8 +149,8 @@ class FavoritesTableViewController: UITableViewController, MoviesTableViewDelega
             for fav in favorites {
                 //update the tableView
                 self.tableView.beginUpdates()
-                if sourceVC.favorites.indexOf({ $0.id == fav.id }) < 0 {
-                    let loc = favorites.indexOf({ $0.id == fav.id })!
+                if sourceVC.favorites.indexOf({ $0.idGuidebox == fav.idGuidebox }) < 0 {
+                    let loc = favorites.indexOf({ $0.idGuidebox == fav.idGuidebox })!
                     let indexPath = NSIndexPath(forRow: loc, inSection: 0)
                     self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
                     favorites.removeAtIndex(loc)
@@ -161,7 +161,7 @@ class FavoritesTableViewController: UITableViewController, MoviesTableViewDelega
             for fav in sourceVC.favorites {
                 //update the tableView
                 self.tableView.beginUpdates()
-                if favorites.indexOf({ $0.id == fav.id }) < 0 {
+                if favorites.indexOf({ $0.idGuidebox == fav.idGuidebox }) < 0 {
                     self.favorites.append(fav)
                     let indexPath = NSIndexPath(forRow: self.favorites.count-1, inSection: 0)
                     self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)

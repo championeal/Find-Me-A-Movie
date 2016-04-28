@@ -18,9 +18,10 @@ class TheMovieDatabaseService {
     var imageSizes = [String]()
     
     //poster_sizes = ["w92","w154","w185","w342","w500","w780","original"]
+    //backdrop_sizes = ["w300","w780","w1280","original"]
     
     func configuration(){
-        dispatch_async(GlobalMainQueue, {
+        dispatch_async(GlobalMainQueue) {
             var fullURL = self.baseURL+"configuration?api_key="+self.APIkey
             fullURL = fullURL.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
             let url = NSURL(string: fullURL)
@@ -43,14 +44,14 @@ class TheMovieDatabaseService {
                 }
             }
             task.resume()
-        })
+        }
     }
     
-    /*func getMovie(id: String, callback: (Movie) -> Void ) {
-        dispatch_async(GlobalUserInitiatedQueue, {
-            var searchURL = self.baseURL+"movie/"+id+"?external_source=imdb_id&api_key="+self.APIkey
-            searchURL = searchURL.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-            let url = NSURL(string: searchURL)
+    func getMovie(id: String, callback: (Movie) -> Void ) {
+        dispatch_async(GlobalUserInitiatedQueue) {
+            var fullURL = self.baseURL+"movie/"+id+"?api_key="+self.APIkey
+            fullURL = fullURL.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+            let url = NSURL(string: fullURL)
             let request = NSMutableURLRequest(URL: url!)
             let session = NSURLSession.sharedSession()
             let task = session.dataTaskWithRequest(request){
@@ -61,19 +62,45 @@ class TheMovieDatabaseService {
                     let result = String(data: data!, encoding: NSASCIIStringEncoding)!
                     self.resultJSON = result
                     let json = JSON(data: data!)
-                    let movieResult = json["movie_results"][0]
-                    let movie = Movie()
-                    dispatch_async(GlobalMainQueue, {
-                        callback(movie)
-                    })
+                    dispatch_async(GlobalMainQueue) {
+                        callback(Movie(title: json["title"].stringValue, release_date: json["release_date"].stringValue, overview: json["overview"].stringValue, idTMDB: String(json["id"].intValue), poster_path: json["poster_path"].stringValue, backdrop_path: json["backdrop_path"].stringValue))
+                    }
                 }
             }
             task.resume()
-        })
-    }*/
+        }
+    }
+    
+    func searchMovies(search: String, callback: ([Movie]) -> Void ) {
+        dispatch_async(GlobalUserInitiatedQueue) {
+            var searchURL = self.baseURL+"search/movie?query=\(search)&api_key="+self.APIkey
+            searchURL = searchURL.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+            let url = NSURL(string: searchURL)
+            let request = NSMutableURLRequest(URL: url!)
+            let session = NSURLSession.sharedSession()
+            var movies = [Movie]()
+            let task = session.dataTaskWithRequest(request){
+                (data, response, error) -> Void in
+                if error != nil {
+                    print(error)
+                } else {
+                    let result = String(data: data!, encoding: NSASCIIStringEncoding)!
+                    self.resultJSON = result
+                    let json = JSON(data: data!)
+                    for (_, movie) in json["results"] {   // using _ in place of index
+                        movies.append(Movie(title: movie["title"].stringValue, release_date: movie["release_date"].stringValue, overview: movie["overview"].stringValue, idTMDB: String(movie["id"].intValue), poster_path: movie["poster_path"].stringValue, backdrop_path: movie["backdrop_path"].stringValue))
+                    }
+                    dispatch_async(GlobalMainQueue) {
+                        callback(movies)
+                    }
+                }
+            }
+            task.resume()
+        }
+    }
     
     func findMovieUsingIMDB(idIMDB: String, callback: (Movie) -> Void ) {
-        dispatch_async(GlobalUserInitiatedQueue, {
+        dispatch_async(GlobalUserInitiatedQueue) {
             var searchURL = self.baseURL+"find/"+idIMDB+"?external_source=imdb_id&api_key="+self.APIkey
             searchURL = searchURL.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
             let url = NSURL(string: searchURL)
@@ -89,40 +116,40 @@ class TheMovieDatabaseService {
                     let json = JSON(data: data!)
                     let movieResult = json["movie_results"][0]
                     let movie = Movie(title: movieResult["title"].stringValue, overview: movieResult["overview"].stringValue ,idIMDB: String(idIMDB), idTMDB: String(movieResult["id"].intValue), imagePosterURL: movieResult["poster_path"].stringValue, imageBackdropURL: movieResult["backdrop_path"].stringValue)
-                    dispatch_async(GlobalMainQueue, {
+                    dispatch_async(GlobalMainQueue) {
                         callback(movie)
-                    })
+                    }
                 }
             }
             task.resume()
-        })
+        }
     }
     
     func getImage(url: String, callback: (UIImage) -> Void ) {
-        dispatch_async(GlobalUserInitiatedQueue, {
+        dispatch_async(GlobalUserInitiatedQueue) {
             var image = UIImage()
             let imageURL = self.imageBaseURL+"w92"+url
             if let url = NSURL(string: imageURL),
                 data = NSData(contentsOfURL: url) {
                     image = UIImage(data: data)!
             }
-            dispatch_async(GlobalMainQueue, {
+            dispatch_async(GlobalMainQueue) {
                 callback(image)
-            })
-        })
+            }
+        }
     }
     
     func getBackdrop(url: String, callback: (UIImage) -> Void ) {
-        dispatch_async(GlobalUserInitiatedQueue, {
+        dispatch_async(GlobalUserInitiatedQueue) {
             var backdrop = UIImage()
-            let backdropURL = self.imageBaseURL+"w300"+url
+            let backdropURL = self.imageBaseURL+"w780"+url
             if let url = NSURL(string: backdropURL),
                 data = NSData(contentsOfURL: url) {
                     backdrop = UIImage(data: data)!
             }
-            dispatch_async(GlobalMainQueue, {
+            dispatch_async(GlobalMainQueue) {
                 callback(backdrop)
-            })
-        })
+            }
+        }
     }
 }
