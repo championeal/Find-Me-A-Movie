@@ -13,3 +13,5 @@ var ratings = [Movie]() {
         
     }
 }
+
+var watchlist = [Movie]()

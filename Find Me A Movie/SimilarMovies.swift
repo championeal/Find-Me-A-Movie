@@ -11,6 +11,7 @@ import Foundation
 class SimilarMoviesService {
     let imdbURL = "http://www.imdb.com/title/"
     let rtURL = "http://www.rottentomatoes.com/m/"
+    let tmdbURL = "https://www.themoviedb.org/movie/"
     
     func getIMDB(imdbID: String, callback: ([String]) -> Void ){
         dispatch_async(GlobalUserInitiatedQueue, {

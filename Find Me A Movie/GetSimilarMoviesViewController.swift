@@ -14,9 +14,35 @@ class GetSimilarMoviesViewController: UIViewController {
     var bestMovies = [String:Int]()
     var movies = [String]()
     let ids = ["tt1045658","tt0420223","tt2395427","tt0478970","tt0169547"]
+    let tmdbURL = "https://www.themoviedb.org/movie/"
+    let tmdbID = "550"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //var movies = [String]()
+        if let url = NSURL(string:tmdbURL+tmdbID+"/recommended") {
+            if let doc = HTML(url: url, encoding: NSUTF8StringEncoding){
+                //print(doc.title!+"\n")
+                print(doc.title!)
+                // Search for nodes by XPath
+                for href in doc.xpath("//tr/td/a/@href"){
+                    let text = href.text!
+                    let index = text.startIndex.advancedBy(7)
+                    let id = text.substringFromIndex(index)
+                    print(id)
+                }
+                //for title in doc.xpath("//div[@class='rec-title']/a") {
+                //    print(title.text!)
+                //}
+                /*for id in doc.xpath("//div[@class='rec_poster']") {
+                    movies.append(id["data-tconst"]!)
+                }
+                dispatch_async(GlobalMainQueue, {
+                    callback(movies)
+                })*/
+            }
+        }
         
         //Movie - Silver Linings Playbook
         
