@@ -99,7 +99,7 @@ class TheMovieDatabaseService {
         }
     }
     
-    func findMovieUsingIMDB(idIMDB: String, callback: (Movie) -> Void ) {
+    /*func findMovieUsingIMDB(idIMDB: String, callback: (Movie) -> Void ) {
         dispatch_async(GlobalUserInitiatedQueue) {
             var searchURL = self.baseURL+"find/"+idIMDB+"?external_source=imdb_id&api_key="+self.APIkey
             searchURL = searchURL.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
@@ -123,7 +123,7 @@ class TheMovieDatabaseService {
             }
             task.resume()
         }
-    }
+    }*/
     
     func getImage(url: String, callback: (UIImage) -> Void ) {
         dispatch_async(GlobalUserInitiatedQueue) {

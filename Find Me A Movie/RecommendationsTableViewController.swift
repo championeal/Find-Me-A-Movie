@@ -9,8 +9,7 @@
 import UIKit
 
 class RecommendationsTableViewController: UITableViewController {
-    
-    var recommendations = [String:Float]()
+
     var recommendedMovies = [Movie]()
     let tmdbService = TheMovieDatabaseService()
     weak var delegate:MoviesTableViewDelegate?
@@ -21,6 +20,7 @@ class RecommendationsTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         recommendedMovies = [Movie]()
+        var recommendations = [String:Float]()
         tableView.reloadData()
         for fav in ratings {
             if let similarMovies = fav.similarTheMovieDB {
@@ -42,20 +42,24 @@ class RecommendationsTableViewController: UITableViewController {
         for rec in sortedRecs {
             let id = rec.0
             let rating = rec.1
-            tmdbService.getMovie(id) {
-                (movie) in
-                if ratings.indexOf({ $0.idTheMovieDB == movie.idTheMovieDB }) < 0 {
-                    self.recommendedMovies.append(movie)
-                    movie.similarRating = rating
-                    //update the tableView
-                    self.tableView.beginUpdates()
-                    let indexPath = NSIndexPath(forRow: self.recommendedMovies.count-1, inSection: 0)
-                    self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-                    self.tableView.endUpdates()
+            if rating > 0.1 {
+                tmdbService.getMovie(id) {
+                    (movie) in
+                    if ratings.indexOf({ $0.idTheMovieDB == movie.idTheMovieDB }) < 0 {
+                        self.recommendedMovies.append(movie)
+                        movie.similarRating = rating
+                        //update the tableView
+                        /*self.tableView.beginUpdates()
+                        let indexPath = NSIndexPath(forRow: self.recommendedMovies.count-1, inSection: 0)
+                        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                        self.tableView.endUpdates()*/
+                        self.recommendedMovies.sortInPlace({ $0.similarRating > $1.similarRating })
+                        self.tableView.reloadData()
+                    }
                 }
             }
             i++
-            if(i >= 10) {
+            if(i >= 25) {
                 break
             }
         }
@@ -78,10 +82,10 @@ class RecommendationsTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("RecommendationsCell", forIndexPath: indexPath)
-        
-        let rec = recommendedMovies[indexPath.row]
-        cell.textLabel?.text = "\(rec.title)"
+        let cell = tableView.dequeueReusableCellWithIdentifier("RecommendationsCell", forIndexPath: indexPath) as! RecommendationsTableViewCell
+
+        let rec = recommendedMovies[indexPath.row] as Movie
+        cell.movie = rec
         return cell
     }
     

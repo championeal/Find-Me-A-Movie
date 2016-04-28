@@ -52,7 +52,6 @@ class SearchMoviesViewController: UIViewController, UITableViewDelegate, UITable
         let cell = tableView.dequeueReusableCellWithIdentifier("SearchMoviesTableViewCell", forIndexPath: indexPath) as! SearchMoviesTableViewCell
         let movie = movies[indexPath.row] as Movie
         cell.movie = movie
-        //cell.delegate = self
         return cell
     }
     

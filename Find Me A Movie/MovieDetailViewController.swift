@@ -88,7 +88,7 @@ class MovieDetailViewController: UIViewController {
             //self.movieNameConstraint.constant = 72
             //self.movieNameConstraint.
         }
-        self.setBackdropGradient()
+        //self.setBackdropGradient()
     }
 
     override func didReceiveMemoryWarning() {
@@ -108,7 +108,7 @@ class MovieDetailViewController: UIViewController {
     override func didMoveToParentViewController(parent: UIViewController?) {
         print("hello")
         if movie.favorite {
-            smService.getTheMovieDB(movie.idTheMovieDB!){
+            smService.getTheMovieDB(movie.idTheMovieDB){
                 (similarMovies) in
                 self.movie.similarTheMovieDB = similarMovies
                 print(self.movie.similarTheMovieDB)

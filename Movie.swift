@@ -11,13 +11,13 @@ import UIKit
 
 class Movie {
     var title: String
-    var releaseDate: String?
+    var year: String?
     var description: String?
     var favorite = false
     var idGuidebox: String?
     var idIMDB: String?
     var idRottenTomatoes: String?
-    var idTheMovieDB: String?
+    var idTheMovieDB: String
     var similarIMDB: [String]?
     var similarTheMovieDB: [String]?
     var similarRating: Float?
@@ -25,12 +25,18 @@ class Movie {
     var posterImage: UIImage?
     var backdropURL: String?
     var backdropImage: UIImage?
-    
-    init(){
-        self.title = ""
+    enum state {
+        case None
+        case Archived
+        case Watchlist
     }
     
-    init(id:Int, title:String){
+    init(){
+        self.title = "test"
+        self.idTheMovieDB = "-1"
+    }
+    
+    /*init(id:Int, title:String){
         self.idGuidebox = "\(id)"
         self.title = title
     }
@@ -49,10 +55,17 @@ class Movie {
         self.idTheMovieDB = idTMDB
         self.posterURL = imagePosterURL
         self.backdropURL = imageBackdropURL
-    }
+    }*/
+    
     init(title: String, release_date: String, overview: String, idTMDB: String, poster_path: String, backdrop_path: String) {
+        if release_date.characters.count < 5 {
+            self.year = release_date
+        }
+        else {
+            let index = release_date.startIndex.advancedBy(4)
+            self.year = release_date.substringToIndex(index)
+        }
         self.title = title
-        self.releaseDate = release_date
         self.description = overview
         self.idTheMovieDB = idTMDB
         if(poster_path == "") {

@@ -15,7 +15,7 @@ class RatingsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let mov = Movie(id:-1, title:"test")
+        let mov = Movie()
         //let sim = ["tt0120338", "tt0903624", "tt0145487", "tt1170358", "tt0325980", "tt1298650", "tt1010048", "tt0371746", "tt0454876", "tt2310332", "tt0418279", "tt0480249"]
         let sim = ["17144", "212986", "140491"]
         mov.similarTheMovieDB = sim
@@ -53,5 +53,15 @@ class RatingsTableViewController: UITableViewController {
         let favorite = ratings[indexPath.row] as Movie
         cell.textLabel?.text = "\(favorite.title)"
         return cell
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destVC =
+            segue.destinationViewController as? MovieDetailViewController,
+            cell = sender as? UITableViewCell,
+            indexPath = self.tableView.indexPathForCell(cell),
+            movie = ratings[indexPath.row] as Movie?{
+                destVC.movie = movie
+        }
     }
 }
