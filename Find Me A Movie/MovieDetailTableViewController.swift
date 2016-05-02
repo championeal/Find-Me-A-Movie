@@ -10,9 +10,9 @@ import UIKit
 
 class MovieDetailTableViewController: UITableViewController {
 
-    
     var movie = Movie()
     let tmdbService = TheMovieDatabaseService()
+    let smService = SimilarMoviesService()
 
     
     @IBOutlet weak var movieDescriptionLabel: UILabel!
@@ -41,12 +41,39 @@ class MovieDetailTableViewController: UITableViewController {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var favoriteButton: UIButton!
     @IBAction func rateDislike(sender: UIButton) {
+        updateRatings(Movie.Rating.Dislike)
     }
     @IBAction func rateOkay(sender: UIButton) {
+        updateRatings(Movie.Rating.Okay)
     }
     @IBAction func rateLike(sender: UIButton) {
+        updateRatings(Movie.Rating.Like)
     }
     @IBAction func rateFavorite(sender: UIButton) {
+        updateRatings(Movie.Rating.Favorite)
+    }
+    
+    func updateRatings(rating: Movie.Rating){
+        if movie.rating == rating {
+            movie.rating = Movie.Rating.None
+            if let index = ratings.indexOf({ $0.idTheMovieDB == movie.idTheMovieDB }) {
+                ratings.removeAtIndex(index)
+            }
+        }
+        else {
+            movie.rating = rating
+            if let index = ratings.indexOf({ $0.idTheMovieDB == movie.idTheMovieDB }) {
+                ratings[index].rating = rating
+            }
+            else {
+                ratings.append(movie)
+            }
+        }
+        updateImages()
+        //parent?.saveFavorite(self)
+        for movie in ratings {
+            print(movie.title, movie.rating)
+        }
     }
     
     func imageForRating(rating: Movie.Rating) -> UIImage? {
@@ -73,6 +100,10 @@ class MovieDetailTableViewController: UITableViewController {
         movieNameLabel.text = movie.title
         movieDescriptionLabel.text = movie.description
         posterImageView.image = movie.posterImage
+        // set correct rating image
+        if let index = ratings.indexOf({ $0.idTheMovieDB == movie.idTheMovieDB }) {
+            movie.rating = ratings[index].rating
+        }
         updateImages()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -87,6 +118,17 @@ class MovieDetailTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    override func didMoveToParentViewController(parent: UIViewController?) {
+        print("hello")
+        if movie.favorite {
+            smService.getTheMovieDB(movie.idTheMovieDB){
+                (similarMovies) in
+                self.movie.similarTheMovieDB = similarMovies
+                print(self.movie.similarTheMovieDB)
+            }
+        }
+    }
+    
     /*override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }*/
