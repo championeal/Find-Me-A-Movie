@@ -25,11 +25,20 @@ class Movie {
     var posterImage: UIImage?
     var backdropURL: String?
     var backdropImage: UIImage?
-    enum state {
+    enum State {
         case None
         case Archived
         case Watchlist
     }
+    var state = State.None
+    enum Rating {
+        case None
+        case Dislike
+        case Okay
+        case Like
+        case Favorite
+    }
+    var rating = Rating.None
     
     init(){
         self.title = "test"

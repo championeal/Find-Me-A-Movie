@@ -91,7 +91,7 @@ class RecommendationsTableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destVC =
-            segue.destinationViewController as? MovieDetailViewController,
+            segue.destinationViewController as? MovieDetailTableViewController,
             cell = sender as? UITableViewCell,
             indexPath = self.tableView.indexPathForCell(cell),
             movie = recommendedMovies[indexPath.row] as Movie?{

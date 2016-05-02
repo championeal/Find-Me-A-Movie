@@ -66,6 +66,9 @@ class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let index = ratings.indexOf({ $0.idTheMovieDB == movie.idTheMovieDB }) {
+            movie.favorite = ratings[index].favorite
+        }
         print(movie.idTheMovieDB)
         movieNameLabel.text = movie.title
         movieDescriptionLabel.text = movie.description
