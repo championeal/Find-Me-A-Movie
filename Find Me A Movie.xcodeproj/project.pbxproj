@@ -147,7 +147,6 @@
 			children = (
 				C7C0E7D21CAC265A00D1547B /* AppDelegate.swift */,
 				C7C0E7DB1CAC265A00D1547B /* Assets.xcassets */,
-				C7C0E7DD1CAC265A00D1547B /* LaunchScreen.storyboard */,
 				C7C0E7E01CAC265A00D1547B /* Info.plist */,
 				C708D1021CBCD09C007E1696 /* Utils.swift */,
 			);
@@ -163,7 +162,6 @@
 				C7E29FA11CCEF11C0054328C /* RecommendationsTableViewController.swift */,
 				C7FCF2AC1CD1C6F40014CA83 /* RecommendationsTableViewCell.swift */,
 				C776E5181CD8001B008077A1 /* MovieDetailTableViewController.swift */,
-				C7268CD31CC71D77002ECA66 /* MovieDetailViewController.swift */,
 				C7FCF2AB1CD1C4150014CA83 /* Old */,
 				C7C5D04B1CBC46C600961517 /* Tests */,
 			);
@@ -193,7 +191,7 @@
 		C7C0E7D11CAC265A00D1547B /* Find Me A Movie */ = {
 			isa = PBXGroup;
 			children = (
-				C7C0E7D81CAC265A00D1547B /* Main.storyboard */,
+				C7E8E04A1CD82B630034576A /* Views */,
 				C7C5D04E1CBC507100961517 /* Services */,
 				C75A6D531CB73B4700824BD0 /* Controllers */,
 				C75A6D4F1CB73A7600824BD0 /* Models */,
@@ -273,9 +271,19 @@
 			name = Services;
 			sourceTree = "<group>";
 		};
+		C7E8E04A1CD82B630034576A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C7C0E7DD1CAC265A00D1547B /* LaunchScreen.storyboard */,
+				C7C0E7D81CAC265A00D1547B /* Main.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		C7FCF2AB1CD1C4150014CA83 /* Old */ = {
 			isa = PBXGroup;
 			children = (
+				C7268CD31CC71D77002ECA66 /* MovieDetailViewController.swift */,
 				C708D0FE1CBCBD89007E1696 /* MoviesTableViewController.swift */,
 				C7C9DA751CBC761D0084172D /* FavoritesTableViewController.swift */,
 				C75A6D541CB744FE00824BD0 /* AddFavoritesViewController.swift */,

@@ -9,7 +9,6 @@
 import UIKit
 
 class SearchMoviesTableViewCell: UITableViewCell {
-    let tmdbService = TheMovieDatabaseService()
     
     @IBOutlet weak var movieImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -19,20 +18,7 @@ class SearchMoviesTableViewCell: UITableViewCell {
         didSet {
             titleLabel.text = movie.title
             yearLabel.text = movie.year
-            if let poster = movie.posterImage {
-                self.movieImageView.image = poster
-            }
-            else if let url = movie.posterURL {
-                print(url)
-                tmdbService.getImage(url) {
-                    (image) in
-                    self.movie.posterImage = image
-                    self.movieImageView.image = image
-                }
-            }
-            else {
-                movieImageView.image = UIImage(named: "posterPlaceholder")
-            }
+            movie.getPosterImage(movieImageView)
         }
     }
 }

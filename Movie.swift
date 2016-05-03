@@ -90,4 +90,25 @@ class Movie {
             self.backdropURL = backdrop_path
         }
     }
+    
+    func getPosterImage(imageView: UIImageView) {
+        let tmdbService = TheMovieDatabaseService()
+        if let poster = posterImage {
+            imageView.image = poster
+        }
+        else if let url = posterURL {
+            print(url)
+            tmdbService.getImage(url) {
+                (image) in
+                self.posterImage = image
+                imageView.image = image
+            }
+        }
+        else {
+            if let image = UIImage(named: "PosterPlaceholder"){
+                posterImage = image
+                imageView.image = image
+            }
+        }
+    }
 }

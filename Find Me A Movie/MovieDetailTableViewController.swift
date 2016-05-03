@@ -31,7 +31,7 @@ class MovieDetailTableViewController: UITableViewController {
                 }
             }
             else {
-                backdropImageView.image = UIImage(named: "backdropPlaceholder")
+                backdropImageView.image = UIImage(named: "BackdropPlaceholder")
             }
         }
     }
@@ -61,6 +61,11 @@ class MovieDetailTableViewController: UITableViewController {
             }
         }
         else {
+            smService.getTheMovieDB(movie.idTheMovieDB){
+                (similarMovies) in
+                self.movie.similarTheMovieDB = similarMovies
+                print(self.movie.similarTheMovieDB)
+            }
             movie.rating = rating
             if let index = ratings.indexOf({ $0.idTheMovieDB == movie.idTheMovieDB }) {
                 ratings[index].rating = rating
@@ -70,7 +75,6 @@ class MovieDetailTableViewController: UITableViewController {
             }
         }
         updateImages()
-        //parent?.saveFavorite(self)
         for movie in ratings {
             print(movie.title, movie.rating)
         }
@@ -119,13 +123,8 @@ class MovieDetailTableViewController: UITableViewController {
     }
 
     override func didMoveToParentViewController(parent: UIViewController?) {
-        print("hello")
-        if movie.favorite {
-            smService.getTheMovieDB(movie.idTheMovieDB){
-                (similarMovies) in
-                self.movie.similarTheMovieDB = similarMovies
-                print(self.movie.similarTheMovieDB)
-            }
+        //print("hello")
+        if movie.rating != Movie.Rating.None {
         }
     }
     

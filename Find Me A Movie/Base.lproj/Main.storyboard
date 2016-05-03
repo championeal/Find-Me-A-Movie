@@ -610,7 +610,7 @@
         <!--Movie Detail Table View Controller-->
         <scene sceneID="Orr-Pc-KjY">
             <objects>
-                <tableViewController id="SCy-Em-AkS" customClass="MovieDetailTableViewController" customModule="Find_Me_A_Movie" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController hidesBottomBarWhenPushed="YES" id="SCy-Em-AkS" customClass="MovieDetailTableViewController" customModule="Find_Me_A_Movie" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Jpc-NW-ydu">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -22,10 +22,24 @@ class RecommendationsTableViewController: UITableViewController {
         recommendedMovies = [Movie]()
         var recommendations = [String:Float]()
         tableView.reloadData()
-        for fav in ratings {
-            if let similarMovies = fav.similarTheMovieDB {
+        for movie in ratings {
+            if let similarMovies = movie.similarTheMovieDB {
+                var multiplier:Float = 0
+                if movie.rating == Movie.Rating.Favorite {
+                    multiplier = 2
+                }
+                else if movie.rating == Movie.Rating.Like {
+                    multiplier = 1
+                }
+                else if movie.rating == Movie.Rating.Okay {
+                    continue
+                }
+                else if movie.rating == Movie.Rating.Dislike {
+                    multiplier = -1
+                }
                 for similar in similarMovies {
-                    let rating = 1/(Float(similarMovies.indexOf(similar)!)+1)
+                    var rating = Float(similarMovies.indexOf(similar)!)+1
+                    rating = multiplier/rating
                     if let _ = recommendations[similar] {
                         recommendations[similar]! += rating
                     }

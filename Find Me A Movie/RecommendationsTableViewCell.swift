@@ -21,20 +21,7 @@ class RecommendationsTableViewCell: UITableViewCell {
             titleLabel.text = movie.title
             yearLabel.text = movie.year
             similarRatingLabel.text = "Rec Rating: \(round(1000*movie.similarRating!)/100)"
-            if let poster = movie.posterImage {
-                self.movieImageView.image = poster
-            }
-            else if let url = movie.posterURL {
-                print(url)
-                tmdbService.getImage(url) {
-                    (image) in
-                    self.movie.posterImage = image
-                    self.movieImageView.image = image
-                }
-            }
-            else {
-                movieImageView.image = UIImage(named: "posterPlaceholder")
-            }
+            movie.getPosterImage(movieImageView)
         }
     }
 }
