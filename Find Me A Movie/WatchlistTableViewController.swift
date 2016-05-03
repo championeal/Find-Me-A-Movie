@@ -21,7 +21,7 @@ class WatchlistTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        ratedMovies.sortInPlace({ $0.title < $1.title })
+        listedMovies.sortInPlace({ $0.title < $1.title })
         tableView.reloadData()
     }
 

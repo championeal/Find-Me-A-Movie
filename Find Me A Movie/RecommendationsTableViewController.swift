@@ -104,6 +104,47 @@ class RecommendationsTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let movie = recommendedMovies[indexPath.row]
+        
+        func appendRemove() {
+            listedMovies.append(movie)
+            self.recommendedMovies.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
+        
+        let watchlist = UITableViewRowAction(style: .Normal, title: "Watchlist") { action, index in
+            movie.list = Movie.List.Watchlist
+            appendRemove()
+        }
+        watchlist.backgroundColor = blue
+        
+        let notInterested = UITableViewRowAction(style: .Normal, title: "Not Interested") { action, index in
+            movie.list = Movie.List.NotInterested
+            appendRemove()
+        }
+        notInterested.backgroundColor = red
+        
+        
+        return [notInterested, watchlist]
+    }
+    
+    /*override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            let movie = recommendedMovies[indexPath.row]
+            movie.list = Movie.List.NotInterested
+            listedMovies.append(movie)
+            recommendedMovies.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        } else if editingStyle == .Insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        }
+    }
+    
+    override func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
+        return "Not Interested"
+    }*/
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destVC =
             segue.destinationViewController as? MovieDetailTableViewController,
