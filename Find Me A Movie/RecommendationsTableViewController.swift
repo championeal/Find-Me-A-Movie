@@ -81,7 +81,21 @@ class RecommendationsTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        if recommendedMovies.count > 0 {
+            tableView.tableHeaderView = nil
+            tableView.separatorStyle = .SingleLine
+            return 1
+        }
+        else {
+            let noResults = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, 100))
+            noResults.text = "Add ratings to receive recommendations"
+            noResults.numberOfLines = 0
+            noResults.textColor = UIColor.blackColor()
+            noResults.textAlignment = .Center
+            tableView.tableHeaderView = noResults
+            tableView.separatorStyle = .None
+            return 0
+        }
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

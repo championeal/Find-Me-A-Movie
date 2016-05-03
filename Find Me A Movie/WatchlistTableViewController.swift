@@ -44,7 +44,20 @@ class WatchlistTableViewController: UITableViewController, UISearchResultsUpdati
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        if watchlist.count > 0 {
+            tableView.tableHeaderView = nil
+            tableView.separatorStyle = .SingleLine
+            return 1
+        }
+        else {
+            let noResults = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, 100))
+            noResults.text = "No movies in watchlist"
+            noResults.textColor = UIColor.blackColor()
+            noResults.textAlignment = .Center
+            tableView.tableHeaderView = noResults
+            tableView.separatorStyle = .None
+            return 0
+        }
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
