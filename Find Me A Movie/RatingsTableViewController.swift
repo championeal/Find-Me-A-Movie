@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RatingsTableViewController: UITableViewController {
+class RatingsTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
     
     let smService = SimilarMoviesService()
     var filteredMovies = [Movie]()
@@ -26,6 +26,8 @@ class RatingsTableViewController: UITableViewController {
         // scope bar
         searchController.searchBar.scopeButtonTitles = ["All", "Favorite", "Like", "Okay", "Dislike"]
         searchController.searchBar.delegate = self
+        
+        //self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: searchController.searchBar)
         
         let mov = Movie()
         //let sim = ["tt0120338", "tt0903624", "tt0145487", "tt1170358", "tt0325980", "tt1298650", "tt1010048", "tt0371746", "tt0454876", "tt2310332", "tt0418279", "tt0480249"]
@@ -101,17 +103,13 @@ class RatingsTableViewController: UITableViewController {
         
         tableView.reloadData()
     }
-}
-
-extension RatingsTableViewController: UISearchResultsUpdating {
+    
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
         filterContentForSearchText(searchController.searchBar.text!, scope: scope)
     }
-}
-
-extension RatingsTableViewController: UISearchBarDelegate {
+    
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
