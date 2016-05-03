@@ -38,7 +38,6 @@ class SimilarMoviesService {
                         let text = href.text!
                         let index = text.startIndex.advancedBy(7)
                         let id = text.substringFromIndex(index)
-                        //print(id)
                         movies.append(id)
                     }
                     dispatch_async(GlobalMainQueue) {

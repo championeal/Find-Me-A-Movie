@@ -36,10 +36,6 @@ class TheMovieDatabaseService {
                     self.resultJSON = result
                     let json = JSON(data: data!)
                     self.imageBaseURL = json["secure_base_url"].stringValue
-                    //for size in json["backdrop_sizes"] {
-                    //    backdropSizes.append(size)
-                    //}
-                    //self.backdropSizes = json["backdrop_sizes"]
                     
                 }
             }
@@ -63,7 +59,7 @@ class TheMovieDatabaseService {
                     self.resultJSON = result
                     let json = JSON(data: data!)
                     dispatch_async(GlobalMainQueue) {
-                        callback(Movie(title: json["title"].stringValue, release_date: json["release_date"].stringValue, overview: json["overview"].stringValue, idTMDB: String(json["id"].intValue), poster_path: json["poster_path"].stringValue, backdrop_path: json["backdrop_path"].stringValue))
+                        callback(Movie(backdrop_path: json["backdrop_path"].stringValue, idTMDB: String(json["id"].intValue), idIMDB: json["imdb_id"].stringValue, overview: json["overview"].stringValue, poster_path: json["poster_path"].stringValue, release_date: json["release_date"].stringValue, title: json["title"].stringValue))
                     }
                 }
             }
@@ -84,40 +80,12 @@ class TheMovieDatabaseService {
                 if error != nil {
                     print(error)
                 } else {
-                    let result = String(data: data!, encoding: NSASCIIStringEncoding)!
-                    self.resultJSON = result
                     let json = JSON(data: data!)
                     for (_, movie) in json["results"] {   // using _ in place of index
                         movies.append(Movie(title: movie["title"].stringValue, release_date: movie["release_date"].stringValue, overview: movie["overview"].stringValue, idTMDB: String(movie["id"].intValue), poster_path: movie["poster_path"].stringValue, backdrop_path: movie["backdrop_path"].stringValue))
                     }
                     dispatch_async(GlobalMainQueue) {
                         callback(movies)
-                    }
-                }
-            }
-            task.resume()
-        }
-    }
-    
-    func findMovieUsingIMDB(idIMDB: String, callback: (Movie) -> Void ) {
-        dispatch_async(GlobalUserInitiatedQueue) {
-            var searchURL = self.baseURL+"find/"+idIMDB+"?external_source=imdb_id&api_key="+self.APIkey
-            searchURL = searchURL.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-            let url = NSURL(string: searchURL)
-            let request = NSMutableURLRequest(URL: url!)
-            let session = NSURLSession.sharedSession()
-            let task = session.dataTaskWithRequest(request){
-                (data, response, error) -> Void in
-                if error != nil {
-                    print(error)
-                } else {
-                    let result = String(data: data!, encoding: NSASCIIStringEncoding)!
-                    self.resultJSON = result
-                    let json = JSON(data: data!)
-                    let movieResult = json["movie_results"][0]
-                    let movie = Movie(title: movieResult["title"].stringValue, overview: movieResult["overview"].stringValue ,idIMDB: String(idIMDB), idTMDB: String(movieResult["id"].intValue), imagePosterURL: movieResult["poster_path"].stringValue, imageBackdropURL: movieResult["backdrop_path"].stringValue)
-                    dispatch_async(GlobalMainQueue) {
-                        callback(movie)
                     }
                 }
             }

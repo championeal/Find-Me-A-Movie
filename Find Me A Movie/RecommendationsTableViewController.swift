@@ -9,11 +9,9 @@
 import UIKit
 
 class RecommendationsTableViewController: UITableViewController {
-    
-    var recommendations = [String:Float]()
+
     var recommendedMovies = [Movie]()
     let tmdbService = TheMovieDatabaseService()
-    weak var delegate:MoviesTableViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,40 +19,55 @@ class RecommendationsTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         recommendedMovies = [Movie]()
+        var recommendations = [String:Float]()
         tableView.reloadData()
-        for fav in ratings {
-            if let similarMovies = fav.similarTheMovieDB {
+        for movie in ratedMovies {
+            if let similarMovies = movie.similarTheMovieDB {
+                var multiplier:Float = 0
+                if movie.rating == Movie.Rating.Favorite {
+                    multiplier = 2
+                }
+                else if movie.rating == Movie.Rating.Like {
+                    multiplier = 1
+                }
+                else if movie.rating == Movie.Rating.Okay {
+                    continue
+                }
+                else if movie.rating == Movie.Rating.Dislike {
+                    multiplier = -1
+                }
                 for similar in similarMovies {
-                    let rating = 1/(Float(similarMovies.indexOf(similar)!)+1)
-                    if let _ = recommendations[similar] {
-                        recommendations[similar]! += rating
-                    }
-                    else {
-                        recommendations[similar] = rating
+                    // only add recommendation if not in ratings or list
+                    if ratedMovies.indexOf({ $0.idTheMovieDB == similar }) < 0 && listedMovies.indexOf({ $0.idTheMovieDB == similar }) < 0 {
+                        var rating = Float(similarMovies.indexOf(similar)!)+1
+                        rating = multiplier/rating
+                        if let _ = recommendations[similar] {
+                            recommendations[similar]! += rating
+                        }
+                        else {
+                            recommendations[similar] = rating
+                        }
                     }
                 }
             }
         }
+        // sort and add top 10 recommendations
         let sortedRecs = recommendations.sort{$0.1 > $1.1}
-        print(sortedRecs)
-        //let sortedTitles = sortedRecs.map {return $0.0}
         var i = 0
         for rec in sortedRecs {
             let id = rec.0
             let rating = rec.1
-            tmdbService.getMovie(id) {
-                (movie) in
-                if ratings.indexOf({ $0.idTheMovieDB == movie.idTheMovieDB }) < 0 {
+            if rating > 0.1 {
+                i++
+                tmdbService.getMovie(id) {
+                    (movie) in
                     self.recommendedMovies.append(movie)
                     movie.similarRating = rating
                     //update the tableView
-                    self.tableView.beginUpdates()
-                    let indexPath = NSIndexPath(forRow: self.recommendedMovies.count-1, inSection: 0)
-                    self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-                    self.tableView.endUpdates()
+                    self.recommendedMovies.sortInPlace({ $0.similarRating > $1.similarRating })
+                    self.tableView.reloadData()
                 }
             }
-            i++
             if(i >= 10) {
                 break
             }
@@ -63,13 +76,26 @@ class RecommendationsTableViewController: UITableViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        if recommendedMovies.count > 0 {
+            tableView.tableHeaderView = nil
+            tableView.separatorStyle = .SingleLine
+            return 1
+        }
+        else {
+            let noResults = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, 100))
+            noResults.text = "Add ratings to receive recommendations"
+            noResults.numberOfLines = 0
+            noResults.textColor = UIColor.blackColor()
+            noResults.textAlignment = .Center
+            tableView.tableHeaderView = noResults
+            tableView.separatorStyle = .None
+            return 0
+        }
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -78,21 +104,45 @@ class RecommendationsTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("RecommendationsCell", forIndexPath: indexPath)
-        
-        let rec = recommendedMovies[indexPath.row]
-        cell.textLabel?.text = "\(rec.title)"
+        let cell = tableView.dequeueReusableCellWithIdentifier("RecommendationsCell", forIndexPath: indexPath) as! RecommendationsTableViewCell
+
+        let rec = recommendedMovies[indexPath.row] as Movie
+        cell.movie = rec
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let movie = recommendedMovies[indexPath.row]
+        
+        func appendRemove() {
+            listedMovies.append(movie)
+            self.recommendedMovies.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
+        
+        let watchlist = UITableViewRowAction(style: .Normal, title: "Watchlist") { action, index in
+            movie.list = Movie.List.Watchlist
+            appendRemove()
+        }
+        watchlist.backgroundColor = blue
+        
+        let notInterested = UITableViewRowAction(style: .Normal, title: "Not Interested") { action, index in
+            movie.list = Movie.List.NotInterested
+            appendRemove()
+        }
+        notInterested.backgroundColor = red
+        
+        
+        return [notInterested, watchlist]
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destVC =
-            segue.destinationViewController as? MovieDetailViewController,
+            segue.destinationViewController as? MovieDetailTableViewController,
             cell = sender as? UITableViewCell,
             indexPath = self.tableView.indexPathForCell(cell),
             movie = recommendedMovies[indexPath.row] as Movie?{
                 destVC.movie = movie
         }
     }
-
 }

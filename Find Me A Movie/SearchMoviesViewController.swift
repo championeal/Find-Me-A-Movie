@@ -11,23 +11,18 @@ import UIKit
 class SearchMoviesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let tmdbService = TheMovieDatabaseService()
-    var movies = [Movie]()  // model for table view
-    var favorites = [Movie]() // array for temp persistence
+    var searchedMovies = [Movie]()
+    var search = false
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var searchTextField: UITextField!
     @IBAction func search(sender: UIButton) {
+        search = true
         if let searchTerm = searchTextField.text {
-            movies.removeAll()
+            searchedMovies.removeAll()
             tmdbService.searchMovies(searchTerm) {
                 (movies) in
-                self.movies = movies
-                /*for movie in self.movies {
-                    if let _ = self.favorites.indexOf ({ $0.id == movie.id })
-                    {
-                        movie.favorite = true
-                    }
-                }*/
+                self.searchedMovies = movies
                 self.tableView.reloadData()
             }
         }
@@ -41,27 +36,39 @@ class SearchMoviesViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        if searchedMovies.count > 0 || search == false{
+            tableView.tableHeaderView = nil
+            tableView.separatorStyle = .SingleLine
+            return 1
+        }
+        else {
+            let noResults = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, 100))
+            noResults.text = "No search results found"
+            noResults.textColor = UIColor.blackColor()
+            noResults.textAlignment = .Center
+            tableView.tableHeaderView = noResults
+            tableView.separatorStyle = .None
+            return 0
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
+        return searchedMovies.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SearchMoviesTableViewCell", forIndexPath: indexPath) as! SearchMoviesTableViewCell
-        let movie = movies[indexPath.row] as Movie
+        let movie = searchedMovies[indexPath.row] as Movie
         cell.movie = movie
-        //cell.delegate = self
         return cell
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destVC =
-            segue.destinationViewController as? MovieDetailViewController,
+            segue.destinationViewController as? MovieDetailTableViewController,
             cell = sender as? UITableViewCell,
             indexPath = self.tableView.indexPathForCell(cell),
-            movie = movies[indexPath.row] as Movie?{
+            movie = searchedMovies[indexPath.row] as Movie?{
                 destVC.movie = movie
         }
     }

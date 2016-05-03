@@ -1,17 +1,17 @@
 //
-//  RatingsTableViewController.swift
+//  WatchlistTableViewController.swift
 //  Find Me A Movie
 //
-//  Created by Neal Sheehan on 4/25/16.
+//  Created by Neal Sheehan on 5/2/16.
 //  Copyright © 2016 Neal Sheehan. All rights reserved.
 //
 
 import UIKit
 
-class RatingsTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
-    
-    let smService = SimilarMoviesService()
+class WatchlistTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
+
     var filteredMovies = [Movie]()
+    var watchlist = [Movie]()
     let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
@@ -24,30 +24,34 @@ class RatingsTableViewController: UITableViewController, UISearchResultsUpdating
         tableView.tableHeaderView = searchController.searchBar
         
         // scope bar
-        searchController.searchBar.scopeButtonTitles = ["All", "Favorite", "Like", "Okay", "Dislike"]
+        searchController.searchBar.scopeButtonTitles = ["Watchlist", "Not Interested"]
         searchController.searchBar.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
-        ratedMovies.sortInPlace({ $0.title < $1.title })
+        listedMovies.sortInPlace({ $0.title < $1.title })
+        watchlist = listedMovies.filter { movie in
+            return movie.list == Movie.List.Watchlist
+        }
+        watchlist.sortInPlace({ $0.title < $1.title })
         tableView.reloadData()
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
+
     // MARK: - Table view data source
-    
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if ratedMovies.count > 0 {
+        if watchlist.count > 0 {
             tableView.tableHeaderView = nil
             tableView.separatorStyle = .SingleLine
             return 1
         }
         else {
             let noResults = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, 100))
-            noResults.text = "No movies have been rated"
+            noResults.text = "No movies in watchlist"
             noResults.textColor = UIColor.blackColor()
             noResults.textAlignment = .Center
             tableView.tableHeaderView = noResults
@@ -55,28 +59,28 @@ class RatingsTableViewController: UITableViewController, UISearchResultsUpdating
             return 0
         }
     }
-    
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.active {
             return filteredMovies.count
         }
-        return ratedMovies.count
+        return watchlist.count
     }
-    
+
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("RatingsCell", forIndexPath: indexPath) as! RatingsTableViewCell
-
-        //let movie = ratedMovies[indexPath.row] as Movie
+        let cell = tableView.dequeueReusableCellWithIdentifier("watchlistCell", forIndexPath: indexPath) as! WatchlistTableViewCell
+        
         let movie: Movie
         if searchController.active {
             movie = filteredMovies[indexPath.row]
         } else {
-            movie = ratedMovies[indexPath.row]
+            movie = watchlist[indexPath.row]
         }
         cell.movie = movie
         return cell
     }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destVC =
@@ -87,21 +91,20 @@ class RatingsTableViewController: UITableViewController, UISearchResultsUpdating
                 if searchController.active {
                     movie = filteredMovies[indexPath.row]
                 } else {
-                    movie = ratedMovies[indexPath.row]
+                    movie = watchlist[indexPath.row]
                 }
                 destVC.movie = movie
         }
     }
-    
+
     // MARK - search functionality
     
-    func filterContentForSearchText(searchText: String, scope: String = "All") {
-        filteredMovies = ratedMovies.filter { movie in
-            let categoryMatch = (scope == "All") || (movie.rating == Movie.Rating.Favorite && scope == "Favorite") || (movie.rating == Movie.Rating.Like && scope == "Like") || (movie.rating == Movie.Rating.Okay && scope == "Okay") || (movie.rating == Movie.Rating.Dislike && scope == "Dislike")
+    func filterContentForSearchText(searchText: String, scope: String = "Watchlist") {
+        filteredMovies = listedMovies.filter { movie in
+            let categoryMatch = (movie.list == Movie.List.Watchlist && scope == "Watchlist") || (movie.list == Movie.List.NotInterested && scope == "Not Interested")
             let consoleMatch = (searchText == "") || movie.title.lowercaseString.containsString(searchText.lowercaseString)
             return  categoryMatch && consoleMatch
         }
-        
         tableView.reloadData()
     }
     
