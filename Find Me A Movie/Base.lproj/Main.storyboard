@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -657,13 +658,47 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMDB-logo" translatesAutoresizingMaskIntoConstraints="NO" id="hH2-W0-e0M">
+                                                    <rect key="frame" x="108" y="40" width="52" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="hH2-W0-e0M" secondAttribute="height" multiplier="25:12" id="FvR-5O-tYt"/>
+                                                        <constraint firstAttribute="height" constant="25" id="KOU-cR-5ba"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IMDB Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l2L-VA-QJI">
+                                                    <rect key="frame" x="168" y="42" width="95" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RottenTomatoes-rotten" translatesAutoresizingMaskIntoConstraints="NO" id="dGQ-ky-WKd">
+                                                    <rect key="frame" x="108" y="73" width="38" height="38"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="dGQ-ky-WKd" secondAttribute="height" multiplier="1:1" id="vln-KA-jnR"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RT Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWv-dT-FX3">
+                                                    <rect key="frame" x="154" y="82" width="71" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="vwj-mF-Q8b" firstAttribute="top" secondItem="gNK-dK-9Bw" secondAttribute="top" id="2O0-vd-diG"/>
+                                                <constraint firstItem="hH2-W0-e0M" firstAttribute="leading" secondItem="gNK-dK-9Bw" secondAttribute="trailing" constant="8" id="4Nd-GB-sGf"/>
+                                                <constraint firstItem="DWv-dT-FX3" firstAttribute="leading" secondItem="dGQ-ky-WKd" secondAttribute="trailing" constant="8" id="CbX-KB-jrc"/>
+                                                <constraint firstItem="l2L-VA-QJI" firstAttribute="leading" secondItem="hH2-W0-e0M" secondAttribute="trailing" constant="8" id="EkT-qm-r8d"/>
+                                                <constraint firstItem="dGQ-ky-WKd" firstAttribute="top" secondItem="hH2-W0-e0M" secondAttribute="bottom" constant="8" id="FcW-hc-QN5"/>
+                                                <constraint firstItem="l2L-VA-QJI" firstAttribute="centerY" secondItem="hH2-W0-e0M" secondAttribute="centerY" id="GGE-Pn-PC0"/>
                                                 <constraint firstAttribute="leadingMargin" secondItem="gNK-dK-9Bw" secondAttribute="leading" id="IGl-DD-LiA"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="vwj-mF-Q8b" secondAttribute="trailing" id="MH5-dx-Dn6"/>
+                                                <constraint firstItem="dGQ-ky-WKd" firstAttribute="leading" secondItem="gNK-dK-9Bw" secondAttribute="trailing" constant="8" id="NPN-oN-He3"/>
+                                                <constraint firstItem="hH2-W0-e0M" firstAttribute="top" secondItem="vwj-mF-Q8b" secondAttribute="bottom" constant="8" id="R80-Wg-jpo"/>
                                                 <constraint firstItem="vwj-mF-Q8b" firstAttribute="leading" secondItem="gNK-dK-9Bw" secondAttribute="trailing" constant="8" id="XNe-ZZ-DTv"/>
                                                 <constraint firstAttribute="topMargin" secondItem="gNK-dK-9Bw" secondAttribute="top" id="bWT-cD-e5Q"/>
+                                                <constraint firstItem="dGQ-ky-WKd" firstAttribute="height" secondItem="hH2-W0-e0M" secondAttribute="height" multiplier="1.5" id="j3Y-D9-LRJ"/>
+                                                <constraint firstItem="DWv-dT-FX3" firstAttribute="centerY" secondItem="dGQ-ky-WKd" secondAttribute="centerY" id="sau-6s-SEl"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -713,8 +748,12 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Rating" id="Efh-Bq-4nL">
+                                <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="70" id="M9P-L8-lSD">
-                                        <rect key="frame" x="0.0" y="419" width="600" height="70"/>
+                                        <rect key="frame" x="0.0" y="447" width="600" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="M9P-L8-lSD" id="L8c-Jc-0Ws">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="69"/>
@@ -783,7 +822,7 @@
                             <tableViewSection headerTitle="Movie Info" id="YYQ-Fz-g6M">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="150" id="y5s-Qb-lKQ">
-                                        <rect key="frame" x="0.0" y="517" width="600" height="150"/>
+                                        <rect key="frame" x="0.0" y="545" width="600" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="y5s-Qb-lKQ" id="80i-bY-QcG">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="149"/>
@@ -805,7 +844,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="146" id="wUo-qL-jpq">
-                                        <rect key="frame" x="0.0" y="667" width="600" height="146"/>
+                                        <rect key="frame" x="0.0" y="695" width="600" height="146"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wUo-qL-jpq" id="cVs-dm-o0b">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="145"/>
@@ -826,12 +865,16 @@
                         <outlet property="backdropImageView" destination="UJQ-MV-pS1" id="aoA-iG-lqe"/>
                         <outlet property="dislikeButton" destination="gfT-RE-Nns" id="e2L-OX-PR8"/>
                         <outlet property="favoriteButton" destination="Yul-iQ-AWr" id="gkT-uP-gOB"/>
+                        <outlet property="imdbImageView" destination="hH2-W0-e0M" id="HeU-Jf-9eO"/>
+                        <outlet property="imdbRatingLabel" destination="l2L-VA-QJI" id="fma-3L-zYF"/>
                         <outlet property="likeButton" destination="PIJ-Up-IjI" id="jHJ-4J-3mq"/>
                         <outlet property="movieDescriptionLabel" destination="zQn-EG-vN0" id="iuD-Ou-dAe"/>
                         <outlet property="movieNameLabel" destination="vwj-mF-Q8b" id="mIS-pT-xEK"/>
                         <outlet property="notInterestedButton" destination="NpG-QO-y5a" id="w9g-XM-MTA"/>
                         <outlet property="okayButton" destination="mtl-mA-mA1" id="8uY-Un-6wK"/>
                         <outlet property="posterImageView" destination="gNK-dK-9Bw" id="BgL-ey-Gog"/>
+                        <outlet property="rottenTomatoesImageView" destination="dGQ-ky-WKd" id="uAv-FH-b7m"/>
+                        <outlet property="rottenTomatoesRatingLabel" destination="DWv-dT-FX3" id="0Fm-1L-0Ng"/>
                         <outlet property="watchlistButton" destination="C3E-7i-Mgo" id="wel-WF-nLB"/>
                     </connections>
                 </tableViewController>
@@ -999,9 +1042,11 @@
     <resources>
         <image name="Dislike" width="50" height="50"/>
         <image name="Favorite" width="50" height="50"/>
+        <image name="IMDB-logo" width="100" height="48"/>
         <image name="Like" width="50" height="50"/>
         <image name="NotInterested" width="20" height="20"/>
         <image name="Okay" width="50" height="50"/>
+        <image name="RottenTomatoes-rotten" width="65" height="65"/>
         <image name="Tab-ratings" width="25" height="25"/>
         <image name="Tab-recommended" width="25" height="25"/>
         <image name="Tab-search" width="25" height="25"/>

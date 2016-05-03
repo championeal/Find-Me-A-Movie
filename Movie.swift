@@ -40,6 +40,13 @@ class Movie {
     }
     var rating = Rating.None
     
+    var ratingIMDB: String?
+    var imageIMDB: UIImage?
+    var ratingRottenTomatoes: String?
+    var typeRottenTomatoes: String?
+    var imageRottenTomatoes: UIImage?
+    
+    // test initializer
     init(){
         self.title = "test"
         self.idTheMovieDB = "-1"
@@ -66,6 +73,8 @@ class Movie {
         self.backdropURL = imageBackdropURL
     }*/
     
+    
+    // TheMovieDatabaseService initializers
     init(title: String, release_date: String, overview: String, idTMDB: String, poster_path: String, backdrop_path: String) {
         if release_date.characters.count < 5 {
             self.year = release_date
@@ -90,6 +99,20 @@ class Movie {
             self.backdropURL = backdrop_path
         }
     }
+    
+    convenience init(idIMDB: String) {
+        self.init()
+        self.idIMDB = idIMDB
+    }
+    
+    // OpenMovieDatabaseService Initializers
+    convenience init(imdbRating: String, tomatoMeter: String, tomatoImage: String){
+        self.init()
+        ratingIMDB = imdbRating
+        ratingRottenTomatoes = tomatoMeter
+        typeRottenTomatoes = tomatoImage
+    }
+    
     
     func getPosterImage(imageView: UIImageView) {
         let tmdbService = TheMovieDatabaseService()

@@ -13,6 +13,7 @@ class MovieDetailTableViewController: UITableViewController {
     var movie = Movie()
     let tmdbService = TheMovieDatabaseService()
     let smService = SimilarMoviesService()
+    let omdbService = OpenMovieDatabaseService()
 
     @IBOutlet weak var backdropImageView: UIImageView! {
         didSet {
@@ -34,6 +35,11 @@ class MovieDetailTableViewController: UITableViewController {
     
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var movieNameLabel: UILabel!
+    
+    @IBOutlet weak var imdbImageView: UIImageView!
+    @IBOutlet weak var imdbRatingLabel: UILabel!
+    @IBOutlet weak var rottenTomatoesImageView: UIImageView!
+    @IBOutlet weak var rottenTomatoesRatingLabel: UILabel!
     
     @IBOutlet weak var notInterestedButton: UIButton!
     @IBOutlet weak var watchlistButton: UIButton!
@@ -67,7 +73,24 @@ class MovieDetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = UITableViewAutomaticDimension
+        //tableView.rowHeight = UITableViewAutomaticDimension
+        
+        tmdbService.getMovie(movie.idTheMovieDB) {
+            (movieTMDB) in
+            self.movie.idIMDB = movieTMDB.idIMDB
+            print(self.movie.idIMDB)
+            self.omdbService.getMovie(movieTMDB.idIMDB!) {
+                (movieOMDB) in
+                self.movie.ratingIMDB = movieOMDB.ratingIMDB
+                self.movie.ratingRottenTomatoes = movieOMDB.ratingRottenTomatoes
+                self.movie.typeRottenTomatoes  = movieOMDB.typeRottenTomatoes
+                self.imdbRatingLabel.text = movieOMDB.ratingIMDB!+"/10"
+                self.rottenTomatoesRatingLabel.text = movieOMDB.ratingRottenTomatoes!+"%"
+                self.rottenTomatoesImageView.image = self.getRottenTomatoesImage(movieOMDB.typeRottenTomatoes!)
+                print(movieOMDB.ratingIMDB, movieOMDB.ratingRottenTomatoes, movieOMDB.typeRottenTomatoes)
+            }
+        }
+        
         movieNameLabel.text = movie.title
         movieDescriptionLabel.text = movie.description
         posterImageView.image = movie.posterImage
@@ -92,6 +115,11 @@ class MovieDetailTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getRottenTomatoesImage(type: String) -> UIImage? {
+        let imageName = "RottenTomatoes-"+type
+        return UIImage(named: imageName)
     }
     
     func updateList(list: Movie.List) {
@@ -152,12 +180,9 @@ class MovieDetailTableViewController: UITableViewController {
     }
     
     func imageForList(list: Movie.List) -> UIImage? {
-        var imageName = ""
+        var imageName = "\(list)"
         if movie.list == list {
-            imageName = "\(list)-selected"
-        }
-        else {
-            imageName = "\(list)"
+            imageName += "-selected"
         }
         return UIImage(named: imageName)
     }
@@ -205,12 +230,9 @@ class MovieDetailTableViewController: UITableViewController {
     }
     
     func imageForRating(rating: Movie.Rating) -> UIImage? {
-        var imageName = ""
+        var imageName = "\(rating)"
         if movie.rating == rating {
-            imageName = "\(rating)-filled"
-        }
-        else {
-            imageName = "\(rating)"
+            imageName += "-filled"
         }
         return UIImage(named: imageName)
     }
