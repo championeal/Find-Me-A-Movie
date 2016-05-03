@@ -21,7 +21,6 @@ class RatingsTableViewController: UITableViewController, UISearchResultsUpdating
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
-        tableView.tableHeaderView = searchController.searchBar
         
         // scope bar
         searchController.searchBar.scopeButtonTitles = ["All", "Favorite", "Like", "Okay", "Dislike"]
@@ -29,6 +28,8 @@ class RatingsTableViewController: UITableViewController, UISearchResultsUpdating
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.tableHeaderView = searchController.searchBar
         ratedMovies.sortInPlace({ $0.title < $1.title })
         tableView.reloadData()
     }
@@ -41,7 +42,6 @@ class RatingsTableViewController: UITableViewController, UISearchResultsUpdating
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if ratedMovies.count > 0 {
-            tableView.tableHeaderView = nil
             tableView.separatorStyle = .SingleLine
             return 1
         }

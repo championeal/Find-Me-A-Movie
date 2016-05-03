@@ -21,7 +21,6 @@ class WatchlistTableViewController: UITableViewController, UISearchResultsUpdati
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
-        tableView.tableHeaderView = searchController.searchBar
         
         // scope bar
         searchController.searchBar.scopeButtonTitles = ["Watchlist", "Not Interested"]
@@ -29,6 +28,8 @@ class WatchlistTableViewController: UITableViewController, UISearchResultsUpdati
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.tableHeaderView = searchController.searchBar
         listedMovies.sortInPlace({ $0.title < $1.title })
         watchlist = listedMovies.filter { movie in
             return movie.list == Movie.List.Watchlist
@@ -45,7 +46,6 @@ class WatchlistTableViewController: UITableViewController, UISearchResultsUpdati
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if watchlist.count > 0 {
-            tableView.tableHeaderView = nil
             tableView.separatorStyle = .SingleLine
             return 1
         }
