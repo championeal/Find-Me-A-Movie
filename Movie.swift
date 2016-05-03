@@ -100,8 +100,8 @@ class Movie {
         }
     }
     
-    convenience init(idIMDB: String) {
-        self.init()
+    convenience init(backdrop_path: String, idTMDB: String, idIMDB: String, overview: String, poster_path: String, release_date: String, title: String) {
+        self.init(title: title, release_date: release_date, overview: overview, idTMDB: idTMDB, poster_path: poster_path, backdrop_path: backdrop_path)
         self.idIMDB = idIMDB
     }
     

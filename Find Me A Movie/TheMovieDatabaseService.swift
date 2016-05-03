@@ -63,7 +63,7 @@ class TheMovieDatabaseService {
                     self.resultJSON = result
                     let json = JSON(data: data!)
                     dispatch_async(GlobalMainQueue) {
-                        callback(Movie(idIMDB: json["imdb_id"].stringValue))
+                        callback(Movie(backdrop_path: json["backdrop_path"].stringValue, idTMDB: String(json["id"].intValue), idIMDB: json["imdb_id"].stringValue, overview: json["overview"].stringValue, poster_path: json["poster_path"].stringValue, release_date: json["release_date"].stringValue, title: json["title"].stringValue))
                     }
                 }
             }

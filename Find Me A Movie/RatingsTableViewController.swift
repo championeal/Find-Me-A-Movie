@@ -49,10 +49,10 @@ class RatingsTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("RatingsCell", forIndexPath: indexPath)
-        
-        let favorite = ratedMovies[indexPath.row] as Movie
-        cell.textLabel?.text = "\(favorite.title)"
+        let cell = tableView.dequeueReusableCellWithIdentifier("RatingsCell", forIndexPath: indexPath) as! RatingsTableViewCell
+
+        let movie = ratedMovies[indexPath.row] as Movie
+        cell.movie = movie
         return cell
     }
     

@@ -18,10 +18,10 @@ class RecommendationsTableViewCell: UITableViewCell {
     
     var movie: Movie! {
         didSet {
+            movie.getPosterImage(movieImageView)
             titleLabel.text = movie.title
             yearLabel.text = movie.year
             similarRatingLabel.text = "Rec Rating: \(round(1000*movie.similarRating!)/100)"
-            movie.getPosterImage(movieImageView)
         }
     }
 }
