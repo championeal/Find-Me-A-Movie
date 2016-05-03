@@ -29,11 +29,11 @@ class RatingsTableViewController: UITableViewController, UISearchResultsUpdating
         
         //self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: searchController.searchBar)
         
-        let mov = Movie()
+        /*let mov = Movie()
         //let sim = ["tt0120338", "tt0903624", "tt0145487", "tt1170358", "tt0325980", "tt1298650", "tt1010048", "tt0371746", "tt0454876", "tt2310332", "tt0418279", "tt0480249"]
         let sim = ["17144", "212986", "140491"]
         mov.similarTheMovieDB = sim
-        ratedMovies.append(mov)
+        ratedMovies.append(mov)*/
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         

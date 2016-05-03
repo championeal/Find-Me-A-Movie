@@ -9,13 +9,36 @@
 import Foundation
 import UIKit
 
-var ratedMovies = [Movie]() {
-    didSet {
-        
+let defaults = NSUserDefaults.standardUserDefaults()
+
+var ratedMovies: [Movie] {
+    get {
+        var movies = [Movie]()
+        if let data = defaults.objectForKey("ratedMovies") as? NSData {
+            movies = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [Movie] ?? [Movie]()
+        }
+        return movies
+    }
+    set (newValue){
+        let data = NSKeyedArchiver.archivedDataWithRootObject(newValue)
+        defaults.setObject(data, forKey: "ratedMovies")
     }
 }
 
-var listedMovies = [Movie]()
+
+var listedMovies: [Movie] {
+    get {
+        var movies = [Movie]()
+        if let data = defaults.objectForKey("listedMovies") as? NSData {
+            movies = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [Movie] ?? [Movie]()
+        }
+        return movies
+    }
+    set (newValue){
+        let data = NSKeyedArchiver.archivedDataWithRootObject(newValue)
+        defaults.setObject(data, forKey: "listedMovies")
+    }
+}
 
 
 let white = UIColor(white: 1, alpha: 1)

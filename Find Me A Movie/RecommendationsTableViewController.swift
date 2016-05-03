@@ -12,7 +12,6 @@ class RecommendationsTableViewController: UITableViewController {
 
     var recommendedMovies = [Movie]()
     let tmdbService = TheMovieDatabaseService()
-    weak var delegate:MoviesTableViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()

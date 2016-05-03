@@ -9,29 +9,27 @@
 import Foundation
 import UIKit
 
-class Movie {
+class Movie: NSObject, NSCoding {
     var title: String
     var year: String?
-    var description: String?
-    var favorite = false
+    var overview: String?
     var idGuidebox: String?
     var idIMDB: String?
     var idRottenTomatoes: String?
     var idTheMovieDB: String
-    var similarIMDB: [String]?
     var similarTheMovieDB: [String]?
     var similarRating: Float?
     var posterURL: String?
     var posterImage: UIImage?
     var backdropURL: String?
     var backdropImage: UIImage?
-    enum List {
+    enum List: String {
         case None
         case NotInterested
         case Watchlist
     }
     var list = List.None
-    enum Rating {
+    enum Rating: String {
         case None
         case Dislike
         case Okay
@@ -47,7 +45,7 @@ class Movie {
     var imageRottenTomatoes: UIImage?
     
     // test initializer
-    init(){
+    override init(){
         self.title = "test"
         self.idTheMovieDB = "-1"
     }
@@ -84,7 +82,7 @@ class Movie {
             self.year = release_date.substringToIndex(index)
         }
         self.title = title
-        self.description = overview
+        self.overview = overview
         self.idTheMovieDB = idTMDB
         if(poster_path == "") {
             self.posterURL = nil
@@ -133,5 +131,67 @@ class Movie {
                 imageView.image = image
             }
         }
+    }
+    
+    // persistence
+    init(
+        title: String,
+        year: String,
+        overview: String,
+        idTheMovieDB: String,
+        similarTheMovieDB: [String],
+        posterURL: String,
+        backdropURL: String,
+        list: List,
+        rating: Rating
+        ) {
+            self.title = title
+            self.year = year
+            self.overview = overview
+            self.idTheMovieDB = idTheMovieDB
+            self.similarTheMovieDB = similarTheMovieDB
+            self.posterURL = posterURL
+            self.backdropURL = backdropURL
+            self.list = list
+            self.rating = rating
+            
+    }
+    
+    required convenience init?(coder decoder: NSCoder) {
+        let similarTheMovieDB = decoder.decodeObjectForKey("similarTheMovieDB") as? [String] ?? [String]()
+        guard let title = decoder.decodeObjectForKey("title") as? String,
+            let year = decoder.decodeObjectForKey("year") as? String,
+            let overview = decoder.decodeObjectForKey("overview") as? String,
+            let idTheMovieDB = decoder.decodeObjectForKey("idTheMovieDB") as? String,
+            let posterURL = decoder.decodeObjectForKey("posterURL") as? String,
+            let backdropURL = decoder.decodeObjectForKey("backdropURL") as? String,
+            let list = List(rawValue: decoder.decodeObjectForKey("list") as! String),
+            let rating = Rating(rawValue: decoder.decodeObjectForKey("rating") as! String)
+            else { return nil }
+        
+        
+        self.init(
+            title: title,
+            year: year,
+            overview: overview,
+            idTheMovieDB: idTheMovieDB,
+            similarTheMovieDB: similarTheMovieDB,
+            posterURL: posterURL,
+            backdropURL: backdropURL,
+            list: list,
+            rating: rating
+        )
+    }
+    
+    func encodeWithCoder(coder: NSCoder) {
+        coder.encodeObject(title, forKey: "title")
+        coder.encodeObject(year, forKey: "year")
+        coder.encodeObject(overview, forKey: "overview")
+        coder.encodeObject(idTheMovieDB, forKey: "idTheMovieDB")
+        coder.encodeObject(similarTheMovieDB, forKey: "similarTheMovieDB")
+        coder.encodeObject(posterURL, forKey: "posterURL")
+        coder.encodeObject(backdropURL, forKey: "backdropURL")
+        coder.encodeObject(list.rawValue, forKey: "list")
+        coder.encodeObject(rating.rawValue, forKey: "rating")
     }
 }

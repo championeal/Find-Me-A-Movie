@@ -92,7 +92,7 @@ class MovieDetailTableViewController: UITableViewController {
         }
         
         movieNameLabel.text = movie.title
-        movieDescriptionLabel.text = movie.description
+        movieDescriptionLabel.text = movie.overview
         posterImageView.image = movie.posterImage
         // set correct rating image for search controller
         if let index = ratedMovies.indexOf({ $0.idTheMovieDB == movie.idTheMovieDB }) {
@@ -128,18 +128,16 @@ class MovieDetailTableViewController: UITableViewController {
         return UIImage(named: imageName)
     }
     
+    // update list
+    
     func updateList(list: Movie.List) {
         if movie.list == list {
             removeMovieFromList()
         }
         else {
+            removeMovieFromList()
             movie.list = list
-            if let index = listedMovies.indexOf({ $0.idTheMovieDB == movie.idTheMovieDB }) {
-                listedMovies[index].list = list
-            }
-            else {
-                listedMovies.append(movie)
-            }
+            listedMovies.append(movie)
         }
         updateListButtons()
         if movie.list == Movie.List.NotInterested {
@@ -193,6 +191,8 @@ class MovieDetailTableViewController: UITableViewController {
         return UIImage(named: imageName)
     }
     
+    // update ratings
+    
     func updateRatings(rating: Movie.Rating){
         if movie.rating == rating {
             removeMovieFromRatings()
@@ -202,14 +202,11 @@ class MovieDetailTableViewController: UITableViewController {
                 (similarMovies) in
                 self.movie.similarTheMovieDB = similarMovies
                 print(self.movie.similarTheMovieDB)
+                self.removeMovieFromRatings()
+                self.movie.rating = rating
+                ratedMovies.append(self.movie)
             }
             movie.rating = rating
-            if let index = ratedMovies.indexOf({ $0.idTheMovieDB == movie.idTheMovieDB }) {
-                ratedMovies[index].rating = rating
-            }
-            else {
-                ratedMovies.append(movie)
-            }
         }
         updateRatingImages()
         if movie.list == Movie.List.NotInterested {
