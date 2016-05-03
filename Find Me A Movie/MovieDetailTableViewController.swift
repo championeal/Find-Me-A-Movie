@@ -14,6 +14,7 @@ class MovieDetailTableViewController: UITableViewController {
     let tmdbService = TheMovieDatabaseService()
     let smService = SimilarMoviesService()
     let omdbService = OpenMovieDatabaseService()
+    let gbService = GuideboxService()
 
     @IBOutlet weak var backdropImageView: UIImageView! {
         didSet {
@@ -73,12 +74,11 @@ class MovieDetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //tableView.rowHeight = UITableViewAutomaticDimension
         
+        // get IMDB and RT ratings
         tmdbService.getMovie(movie.idTheMovieDB) {
             (movieTMDB) in
             self.movie.idIMDB = movieTMDB.idIMDB
-            print(self.movie.idIMDB)
             self.omdbService.getMovie(movieTMDB.idIMDB!) {
                 (movieOMDB) in
                 self.movie.ratingIMDB = movieOMDB.ratingIMDB
@@ -87,29 +87,33 @@ class MovieDetailTableViewController: UITableViewController {
                 self.imdbRatingLabel.text = movieOMDB.ratingIMDB!+"/10"
                 self.rottenTomatoesRatingLabel.text = movieOMDB.ratingRottenTomatoes!+"%"
                 self.rottenTomatoesImageView.image = self.getRottenTomatoesImage(movieOMDB.typeRottenTomatoes!)
-                print(movieOMDB.ratingIMDB, movieOMDB.ratingRottenTomatoes, movieOMDB.typeRottenTomatoes)
             }
         }
         
+        // streaming services will be implemented next version
+        /*gbService.getIDUsingTMDB(movie.idTheMovieDB) {
+            (idGuidebox) in
+            self.movie.idGuidebox = idGuidebox
+            self.gbService.getMovie(idGuidebox) {
+                (yes) in
+            }
+        }*/
+        
         movieNameLabel.text = movie.title
         movieDescriptionLabel.text = movie.overview
-        posterImageView.image = movie.posterImage
+        movie.getPosterImage(posterImageView)
+        
         // set correct rating image for search controller
         if let index = ratedMovies.indexOf({ $0.idTheMovieDB == movie.idTheMovieDB }) {
             movie.rating = ratedMovies[index].rating
         }
         updateRatingImages()
+        
         // set correct list button for search controller
         if let index = listedMovies.indexOf({ $0.idTheMovieDB == movie.idTheMovieDB }) {
             movie.list = listedMovies[index].list
         }
         updateListButtons()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        //self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -128,6 +132,7 @@ class MovieDetailTableViewController: UITableViewController {
         return UIImage(named: imageName)
     }
     
+    
     // update list
     
     func updateList(list: Movie.List) {
@@ -143,9 +148,6 @@ class MovieDetailTableViewController: UITableViewController {
         if movie.list == Movie.List.NotInterested {
             removeMovieFromRatings()
             updateRatingImages()
-        }
-        for movie in listedMovies {
-            print(movie.title, movie.list)
         }
     }
     
@@ -191,6 +193,7 @@ class MovieDetailTableViewController: UITableViewController {
         return UIImage(named: imageName)
     }
     
+    
     // update ratings
     
     func updateRatings(rating: Movie.Rating){
@@ -201,7 +204,6 @@ class MovieDetailTableViewController: UITableViewController {
             smService.getTheMovieDB(movie.idTheMovieDB){
                 (similarMovies) in
                 self.movie.similarTheMovieDB = similarMovies
-                print(self.movie.similarTheMovieDB)
                 self.removeMovieFromRatings()
                 self.movie.rating = rating
                 ratedMovies.append(self.movie)
@@ -212,9 +214,6 @@ class MovieDetailTableViewController: UITableViewController {
         if movie.list == Movie.List.NotInterested {
             removeMovieFromList()
             updateListButtons()
-        }
-        for movie in ratedMovies {
-            print(movie.title, movie.rating)
         }
     }
     
@@ -239,65 +238,4 @@ class MovieDetailTableViewController: UITableViewController {
         }
         return UIImage(named: imageName)
     }
-    
-    /*override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }*/
-    
-    
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

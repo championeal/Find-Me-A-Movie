@@ -26,19 +26,6 @@ class RatingsTableViewController: UITableViewController, UISearchResultsUpdating
         // scope bar
         searchController.searchBar.scopeButtonTitles = ["All", "Favorite", "Like", "Okay", "Dislike"]
         searchController.searchBar.delegate = self
-        
-        //self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: searchController.searchBar)
-        
-        /*let mov = Movie()
-        //let sim = ["tt0120338", "tt0903624", "tt0145487", "tt1170358", "tt0325980", "tt1298650", "tt1010048", "tt0371746", "tt0454876", "tt2310332", "tt0418279", "tt0480249"]
-        let sim = ["17144", "212986", "140491"]
-        mov.similarTheMovieDB = sim
-        ratedMovies.append(mov)*/
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -48,7 +35,6 @@ class RatingsTableViewController: UITableViewController, UISearchResultsUpdating
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - Table view data source
@@ -93,6 +79,8 @@ class RatingsTableViewController: UITableViewController, UISearchResultsUpdating
                 destVC.movie = movie
         }
     }
+    
+    // MARK - search functionality
     
     func filterContentForSearchText(searchText: String, scope: String = "All") {
         filteredMovies = ratedMovies.filter { movie in

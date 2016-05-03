@@ -11,23 +11,16 @@ import UIKit
 class SearchMoviesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let tmdbService = TheMovieDatabaseService()
-    var movies = [Movie]()  // model for table view
-    var favorites = [Movie]() // array for temp persistence
+    var searchedMovies = [Movie]()
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var searchTextField: UITextField!
     @IBAction func search(sender: UIButton) {
         if let searchTerm = searchTextField.text {
-            movies.removeAll()
+            searchedMovies.removeAll()
             tmdbService.searchMovies(searchTerm) {
                 (movies) in
-                self.movies = movies
-                /*for movie in self.movies {
-                    if let _ = self.favorites.indexOf ({ $0.id == movie.id })
-                    {
-                        movie.favorite = true
-                    }
-                }*/
+                self.searchedMovies = movies
                 self.tableView.reloadData()
             }
         }
@@ -45,12 +38,12 @@ class SearchMoviesViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
+        return searchedMovies.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SearchMoviesTableViewCell", forIndexPath: indexPath) as! SearchMoviesTableViewCell
-        let movie = movies[indexPath.row] as Movie
+        let movie = searchedMovies[indexPath.row] as Movie
         cell.movie = movie
         return cell
     }
@@ -60,7 +53,7 @@ class SearchMoviesViewController: UIViewController, UITableViewDelegate, UITable
             segue.destinationViewController as? MovieDetailTableViewController,
             cell = sender as? UITableViewCell,
             indexPath = self.tableView.indexPathForCell(cell),
-            movie = movies[indexPath.row] as Movie?{
+            movie = searchedMovies[indexPath.row] as Movie?{
                 destVC.movie = movie
         }
     }

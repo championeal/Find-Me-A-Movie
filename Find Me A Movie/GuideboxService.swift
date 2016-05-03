@@ -12,36 +12,8 @@ class GuideboxService {
     let baseURL = "https://api-public.guidebox.com/v1.43/US/"
     let APIkey = "rK8nuMrG5dZYDqZZFfDb2QO8dk1ATzmB"
     var resultJSON: String?
-    
-    /*func searchMovies(search: String, callback: ([Movie]) -> Void ) {
-        dispatch_async(GlobalUserInitiatedQueue, {
-            var searchURL = self.baseURL+self.APIkey+"/search/movie/title/\(search)"
-            searchURL = searchURL.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-            let url = NSURL(string: searchURL)
-            let request = NSMutableURLRequest(URL: url!)
-            let session = NSURLSession.sharedSession()
-            var movies = [Movie]()
-            let task = session.dataTaskWithRequest(request){
-                (data, response, error) -> Void in
-                if error != nil {
-                    print(error)
-                } else {
-                    let result = String(data: data!, encoding: NSASCIIStringEncoding)!
-                    self.resultJSON = result
-                    let json = JSON(data: data!)
-                    for (_, movie) in json["results"] {   // using _ in place of key because I don't care about the key (actually the index)
-                        movies.append(Movie(id:movie["id"].intValue, title:movie["title"].stringValue, idIMDB: movie["imdb"].stringValue, idRT: String(movie["rottentomatoes"].intValue), idTMDB: String(movie["themoviedb"].intValue)))
-                    }
-                    dispatch_async(GlobalMainQueue, {
-                        callback(movies)
-                    })
-                }
-            }
-            task.resume()
-        })
-    }
-    
-    func getMovie(id: Int, favorite: Bool, callback: (Movie) -> Void ) {
+
+    func getMovie(id: String, callback: (Bool) -> Void ) {
         var searchURL = baseURL+APIkey+"/movie/\(id)"
         searchURL = searchURL.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         let url = NSURL(string: searchURL)
@@ -57,10 +29,9 @@ class GuideboxService {
                 dispatch_async(dispatch_get_main_queue(), {
                     self.resultJSON = result
                     let json = JSON(data: data!)
-                    let movie: Movie?
-                    if(favorite){
-                        movie = Movie(id: id, title: json["title"].stringValue, idIMDB: json["imdb"].stringValue, idRT: String(json["rottentomatoes"].intValue), idTMDB: String(json["themoviedb"].intValue))
-                        callback(movie!)
+                    for (_,item) in json["purchase_ios_sources"] {
+                        print(item)
+                        print(item["source"])
                     }
                 })
                 
@@ -69,9 +40,9 @@ class GuideboxService {
         task.resume()
     }
     
-    func searchMoviesUsingIMDB(idIMDB: String, callback: (Movie) -> Void ) {
+    func getIDUsingTMDB(idTMDB: String, callback: (String) -> Void ) {
         dispatch_async(GlobalUserInitiatedQueue, {
-            var searchURL = self.baseURL+self.APIkey+"/search/movie/id/imdb/\(idIMDB)"
+            var searchURL = self.baseURL+self.APIkey+"/search/movie/id/themoviedb/\(idTMDB)"
             searchURL = searchURL.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
             let delayInSeconds = 1.0
             let popTime = dispatch_time(DISPATCH_TIME_NOW,
@@ -88,14 +59,14 @@ class GuideboxService {
                         let result = String(data: data!, encoding: NSASCIIStringEncoding)!
                         self.resultJSON = result
                         let json = JSON(data: data!)
-                        let movie = Movie(id: json["id"].intValue, title: json["title"].stringValue, idIMDB: json["imdb"].stringValue, idRT: String(json["rottentomatoes"].intValue), idTMDB: String(json["themoviedb"].intValue))
+                        let id = String(json["id"].intValue)
                         dispatch_async(GlobalMainQueue, {
-                            callback(movie)
+                            callback(id)
                         })
                     }
                 }
             task.resume()
             }
         })
-    }*/
+    }
 }

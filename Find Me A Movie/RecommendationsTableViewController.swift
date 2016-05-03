@@ -51,24 +51,19 @@ class RecommendationsTableViewController: UITableViewController {
                 }
             }
         }
+        // sort and add top 10 recommendations
         let sortedRecs = recommendations.sort{$0.1 > $1.1}
-        print(sortedRecs)
-        //let sortedTitles = sortedRecs.map {return $0.0}
         var i = 0
         for rec in sortedRecs {
             let id = rec.0
             let rating = rec.1
             if rating > 0.1 {
-                    i++
+                i++
                 tmdbService.getMovie(id) {
                     (movie) in
                     self.recommendedMovies.append(movie)
                     movie.similarRating = rating
                     //update the tableView
-                    /*self.tableView.beginUpdates()
-                    let indexPath = NSIndexPath(forRow: self.recommendedMovies.count-1, inSection: 0)
-                    self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-                    self.tableView.endUpdates()*/
                     self.recommendedMovies.sortInPlace({ $0.similarRating > $1.similarRating })
                     self.tableView.reloadData()
                 }
@@ -81,7 +76,6 @@ class RecommendationsTableViewController: UITableViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - Table view data source
@@ -128,22 +122,6 @@ class RecommendationsTableViewController: UITableViewController {
         return [notInterested, watchlist]
     }
     
-    /*override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.Delete {
-            let movie = recommendedMovies[indexPath.row]
-            movie.list = Movie.List.NotInterested
-            listedMovies.append(movie)
-            recommendedMovies.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-        }
-    }
-    
-    override func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
-        return "Not Interested"
-    }*/
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destVC =
             segue.destinationViewController as? MovieDetailTableViewController,
@@ -153,5 +131,4 @@ class RecommendationsTableViewController: UITableViewController {
                 destVC.movie = movie
         }
     }
-
 }
