@@ -118,7 +118,13 @@ class MovieDetailTableViewController: UITableViewController {
     }
     
     func getRottenTomatoesImage(type: String) -> UIImage? {
-        let imageName = "RottenTomatoes-"+type
+        var imageName = "RottenTomatoes-"
+        if type == "N/A" {
+            imageName += "rotten"
+        }
+        else {
+            imageName += type
+        }
         return UIImage(named: imageName)
     }
     
