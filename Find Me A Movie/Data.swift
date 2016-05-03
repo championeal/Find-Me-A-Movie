@@ -8,10 +8,10 @@
 
 import Foundation
 
-var ratings = [Movie]() {
+var ratedMovies = [Movie]() {
     didSet {
         
     }
 }
 
-var watchlist = [Movie]()
+var listedMovies = [Movie]()

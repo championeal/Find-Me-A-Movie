@@ -41,14 +41,14 @@ class MovieDetailViewController: UIViewController {
             }
         }
         sender.setImage(imageForRating(movie.favorite, type: "favorite"), forState: .Normal)
-        if let index = ratings.indexOf({ $0.idTheMovieDB == movie.idTheMovieDB }) {
-            ratings.removeAtIndex(index)
+        if let index = ratedMovies.indexOf({ $0.idTheMovieDB == movie.idTheMovieDB }) {
+            ratedMovies.removeAtIndex(index)
         }
         else {
-            ratings.append(movie)
+            ratedMovies.append(movie)
         }
         //parent?.saveFavorite(self)
-        for movie in ratings {
+        for movie in ratedMovies {
             print(movie.title)
         }
     }
@@ -66,8 +66,8 @@ class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let index = ratings.indexOf({ $0.idTheMovieDB == movie.idTheMovieDB }) {
-            movie.favorite = ratings[index].favorite
+        if let index = ratedMovies.indexOf({ $0.idTheMovieDB == movie.idTheMovieDB }) {
+            movie.favorite = ratedMovies[index].favorite
         }
         print(movie.idTheMovieDB)
         movieNameLabel.text = movie.title

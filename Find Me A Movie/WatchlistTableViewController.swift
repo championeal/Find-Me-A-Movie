@@ -19,6 +19,11 @@ class WatchlistTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        ratedMovies.sortInPlace({ $0.title < $1.title })
+        tableView.reloadData()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -29,23 +34,33 @@ class WatchlistTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return listedMovies.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("watchlistCell", forIndexPath: indexPath)
+        
+        let movie = listedMovies[indexPath.row] as Movie
+        cell.textLabel?.text = "\(movie.title)"
         return cell
     }
-    */
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destVC =
+            segue.destinationViewController as? MovieDetailTableViewController,
+            cell = sender as? UITableViewCell,
+            indexPath = self.tableView.indexPathForCell(cell),
+            movie = listedMovies[indexPath.row] as Movie?{
+                destVC.movie = movie
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.

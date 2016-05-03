@@ -40,6 +40,7 @@
 		C7E29FA01CCEE0800054328C /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E29F9F1CCEE0800054328C /* Data.swift */; };
 		C7E29FA21CCEF11C0054328C /* RecommendationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E29FA11CCEF11C0054328C /* RecommendationsTableViewController.swift */; };
 		C7E29FA41CCEF2710054328C /* RatingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E29FA31CCEF2710054328C /* RatingsTableViewController.swift */; };
+		C7E8E04C1CD82E960034576A /* WatchlistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E8E04B1CD82E960034576A /* WatchlistTableViewController.swift */; };
 		C7F631311CB59E5C00280768 /* GetStreamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F631301CB59E5C00280768 /* GetStreamsViewController.swift */; };
 		C7F631331CB59EDA00280768 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F631321CB59EDA00280768 /* SwiftyJSON.swift */; };
 		C7FCF2AD1CD1C6F40014CA83 /* RecommendationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FCF2AC1CD1C6F40014CA83 /* RecommendationsTableViewCell.swift */; };
@@ -102,6 +103,7 @@
 		C7E29F9F1CCEE0800054328C /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		C7E29FA11CCEF11C0054328C /* RecommendationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationsTableViewController.swift; sourceTree = "<group>"; };
 		C7E29FA31CCEF2710054328C /* RatingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsTableViewController.swift; sourceTree = "<group>"; };
+		C7E8E04B1CD82E960034576A /* WatchlistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchlistTableViewController.swift; sourceTree = "<group>"; };
 		C7F631301CB59E5C00280768 /* GetStreamsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetStreamsViewController.swift; sourceTree = "<group>"; };
 		C7F631321CB59EDA00280768 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		C7FCF2AC1CD1C6F40014CA83 /* RecommendationsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationsTableViewCell.swift; sourceTree = "<group>"; };
@@ -156,11 +158,11 @@
 		C75A6D531CB73B4700824BD0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C7E8E04D1CD82EA00034576A /* Cells */,
 				C7B19C211CC9333100F8E7F4 /* SearchMoviesViewController.swift */,
-				C7B19C231CC9340100F8E7F4 /* SearchMoviesTableViewCell.swift */,
-				C7E29FA31CCEF2710054328C /* RatingsTableViewController.swift */,
 				C7E29FA11CCEF11C0054328C /* RecommendationsTableViewController.swift */,
-				C7FCF2AC1CD1C6F40014CA83 /* RecommendationsTableViewCell.swift */,
+				C7E29FA31CCEF2710054328C /* RatingsTableViewController.swift */,
+				C7E8E04B1CD82E960034576A /* WatchlistTableViewController.swift */,
 				C776E5181CD8001B008077A1 /* MovieDetailTableViewController.swift */,
 				C7FCF2AB1CD1C4150014CA83 /* Old */,
 				C7C5D04B1CBC46C600961517 /* Tests */,
@@ -278,6 +280,15 @@
 				C7C0E7D81CAC265A00D1547B /* Main.storyboard */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		C7E8E04D1CD82EA00034576A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C7B19C231CC9340100F8E7F4 /* SearchMoviesTableViewCell.swift */,
+				C7FCF2AC1CD1C6F40014CA83 /* RecommendationsTableViewCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		C7FCF2AB1CD1C4150014CA83 /* Old */ = {
@@ -436,6 +447,7 @@
 				C708D0FF1CBCBD89007E1696 /* MoviesTableViewController.swift in Sources */,
 				C7E29FA21CCEF11C0054328C /* RecommendationsTableViewController.swift in Sources */,
 				C7C9DA7A1CBC89690084172D /* Movie.swift in Sources */,
+				C7E8E04C1CD82E960034576A /* WatchlistTableViewController.swift in Sources */,
 				C7C0E7D31CAC265A00D1547B /* AppDelegate.swift in Sources */,
 				C75A6D551CB744FE00824BD0 /* AddFavoritesViewController.swift in Sources */,
 				C7F631331CB59EDA00280768 /* SwiftyJSON.swift in Sources */,

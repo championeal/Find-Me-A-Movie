@@ -22,7 +22,7 @@ class RecommendationsTableViewController: UITableViewController {
         recommendedMovies = [Movie]()
         var recommendations = [String:Float]()
         tableView.reloadData()
-        for movie in ratings {
+        for movie in ratedMovies {
             if let similarMovies = movie.similarTheMovieDB {
                 var multiplier:Float = 0
                 if movie.rating == Movie.Rating.Favorite {
@@ -38,13 +38,16 @@ class RecommendationsTableViewController: UITableViewController {
                     multiplier = -1
                 }
                 for similar in similarMovies {
-                    var rating = Float(similarMovies.indexOf(similar)!)+1
-                    rating = multiplier/rating
-                    if let _ = recommendations[similar] {
-                        recommendations[similar]! += rating
-                    }
-                    else {
-                        recommendations[similar] = rating
+                    // only add recommendation if not in ratings or list
+                    if ratedMovies.indexOf({ $0.idTheMovieDB == similar }) < 0 && listedMovies.indexOf({ $0.idTheMovieDB == similar }) < 0 {
+                        var rating = Float(similarMovies.indexOf(similar)!)+1
+                        rating = multiplier/rating
+                        if let _ = recommendations[similar] {
+                            recommendations[similar]! += rating
+                        }
+                        else {
+                            recommendations[similar] = rating
+                        }
                     }
                 }
             }
@@ -57,23 +60,21 @@ class RecommendationsTableViewController: UITableViewController {
             let id = rec.0
             let rating = rec.1
             if rating > 0.1 {
+                    i++
                 tmdbService.getMovie(id) {
                     (movie) in
-                    if ratings.indexOf({ $0.idTheMovieDB == movie.idTheMovieDB }) < 0 {
-                        self.recommendedMovies.append(movie)
-                        movie.similarRating = rating
-                        //update the tableView
-                        /*self.tableView.beginUpdates()
-                        let indexPath = NSIndexPath(forRow: self.recommendedMovies.count-1, inSection: 0)
-                        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-                        self.tableView.endUpdates()*/
-                        self.recommendedMovies.sortInPlace({ $0.similarRating > $1.similarRating })
-                        self.tableView.reloadData()
-                    }
+                    self.recommendedMovies.append(movie)
+                    movie.similarRating = rating
+                    //update the tableView
+                    /*self.tableView.beginUpdates()
+                    let indexPath = NSIndexPath(forRow: self.recommendedMovies.count-1, inSection: 0)
+                    self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                    self.tableView.endUpdates()*/
+                    self.recommendedMovies.sortInPlace({ $0.similarRating > $1.similarRating })
+                    self.tableView.reloadData()
                 }
             }
-            i++
-            if(i >= 25) {
+            if(i >= 10) {
                 break
             }
         }

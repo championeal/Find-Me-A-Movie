@@ -19,7 +19,7 @@ class RatingsTableViewController: UITableViewController {
         //let sim = ["tt0120338", "tt0903624", "tt0145487", "tt1170358", "tt0325980", "tt1298650", "tt1010048", "tt0371746", "tt0454876", "tt2310332", "tt0418279", "tt0480249"]
         let sim = ["17144", "212986", "140491"]
         mov.similarTheMovieDB = sim
-        ratings.append(mov)
+        ratedMovies.append(mov)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -28,6 +28,7 @@ class RatingsTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        ratedMovies.sortInPlace({ $0.title < $1.title })
         tableView.reloadData()
     }
     
@@ -43,14 +44,14 @@ class RatingsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ratings.count
+        return ratedMovies.count
     }
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RatingsCell", forIndexPath: indexPath)
         
-        let favorite = ratings[indexPath.row] as Movie
+        let favorite = ratedMovies[indexPath.row] as Movie
         cell.textLabel?.text = "\(favorite.title)"
         return cell
     }
@@ -60,7 +61,7 @@ class RatingsTableViewController: UITableViewController {
             segue.destinationViewController as? MovieDetailTableViewController,
             cell = sender as? UITableViewCell,
             indexPath = self.tableView.indexPathForCell(cell),
-            movie = ratings[indexPath.row] as Movie?{
+            movie = ratedMovies[indexPath.row] as Movie?{
                 destVC.movie = movie
         }
     }
